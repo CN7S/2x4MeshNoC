@@ -6,11 +6,12 @@
 `define ALMOST_EMPTY_GAP 		3	
 `define FIFO_DEEP 				8	
 
-`define OUT_LOCAL_PORT			(3'b000)
-`define OUT_X1_PORT				(3'b001)
-`define OUT_X2_PORT				(3'b010)
-`define OUT_Y1_PORT				(3'b011)
-`define OUT_Y2_PORT				(3'b100)
+`define EMPTY					(3'b000)
+`define OUT_LOCAL_PORT			(3'b001)
+`define OUT_X1_PORT				(3'b010)
+`define OUT_X2_PORT				(3'b011)
+`define OUT_Y1_PORT				(3'b100)
+`define OUT_Y2_PORT				(3'b101)
 
 
 `define SW_LOCAL			(3'b000)
