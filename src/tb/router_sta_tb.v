@@ -1,6 +1,6 @@
 `include "global.v"
 
-module router_tb();
+module router_sta_tb();
 
 reg clk;
 reg rst_n;
