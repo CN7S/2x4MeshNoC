@@ -1,6 +1,6 @@
 `include "global.v"
 
-module router
+module router_sta
 (
 	input 			clk,
 	input 			rst_n,
