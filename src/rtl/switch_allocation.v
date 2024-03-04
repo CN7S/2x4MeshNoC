@@ -10,6 +10,11 @@ module switch_allocation_3port
 	input	[2:0]		port_y_dst		,
 	input	[2:0]		port_local_dst	,
 
+	//input vaild
+	output reg			port_x_valid,
+	output reg			port_y_valid,
+	output reg 			port_local_valid,
+
 	// allocate outport switch
 	output reg	[2:0]	out_x_sw		,
 	output reg	[2:0]	out_y_sw		,
@@ -48,6 +53,22 @@ always@(posedge clk or negedge rst_n) begin
 		out_x_sw			<= out_x_sw_temp;
 		out_y_sw			<= out_y_sw_temp;
 		out_local_sw		<= out_local_sw_temp;
+	end
+end
+
+always@(posedge clk or negedge rst_n) begin
+	if(!rst_n) begin
+		port_x_valid 		<= 0;
+		port_y_valid 		<= 0;
+		port_local_valid 	<= 0;
+	end
+	else begin
+		if(port_x_dst != `EMPTY) port_x_valid <= 1;
+		else					port_x_valid <= 0;
+		if(port_y_dst != `EMPTY) port_y_valid <= 1;
+		else					port_y_valid <= 0;
+		if(port_local_dst != `EMPTY) port_local_valid <= 1;
+		else					port_local_valid <= 0;
 	end
 end
 
@@ -207,6 +228,12 @@ module switch_allocation_4port
 	input	[2:0]		port_y_dst		,
 	input	[2:0]		port_x2_dst		,
 	input	[2:0]		port_local_dst	,
+	
+	//input vaild
+	output reg			port_x1_valid,
+	output reg			port_x2_valid,
+	output reg			port_y_valid,
+	output reg 			port_local_valid,
 
 	// allocate outport switch
 	output reg	[2:0]	out_x1_sw		,
@@ -254,6 +281,25 @@ always@(posedge clk or negedge rst_n) begin
 		out_x2_sw			<= out_x2_sw_temp;
 		out_y_sw			<= out_y_sw_temp;
 		out_local_sw		<= out_local_sw_temp;
+	end
+end
+
+always@(posedge clk or negedge rst_n) begin
+	if(!rst_n) begin
+		port_x1_valid 		<= 0;
+		port_x2_valid 		<= 0;
+		port_y_valid 		<= 0;
+		port_local_valid 	<= 0;
+	end
+	else begin
+		if(port_x1_dst != `EMPTY) port_x1_valid <= 1;
+		else					port_x1_valid <= 0;
+		if(port_x2_dst != `EMPTY) port_x2_valid <= 1;
+		else					port_x2_valid <= 0;
+		if(port_y_dst != `EMPTY) port_y_valid <= 1;
+		else					port_y_valid <= 0;
+		if(port_local_dst != `EMPTY) port_local_valid <= 1;
+		else					port_local_valid <= 0;
 	end
 end
 
