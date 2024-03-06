@@ -10,6 +10,10 @@ module switch_allocation_3port
 	input	[2:0]		port_y_dst		,
 	input	[2:0]		port_local_dst	,
 
+	input 				port_x_en,
+	input 				port_y_en,
+	input 				port_local_en,
+	
 	//input vaild
 	output reg			port_x_valid,
 	output reg			port_y_valid,
@@ -29,12 +33,36 @@ reg [2:0] out_x_sw_temp;
 reg [2:0] out_y_sw_temp;
 reg [2:0] out_local_sw_temp;
 
+reg [2:0] port_x_dst_buf;
+reg [2:0] port_y_dst_buf;
+reg [2:0] port_local_dst_buf;
+wire [2:0] port_x_dst_tmp;
+wire [2:0] port_y_dst_tmp;
+wire [2:0] port_local_dst_tmp;
+
+
+assign port_x_dst_tmp = port_x_en ? port_x_dst : port_x_dst_buf;
+assign port_y_dst_tmp =  port_y_en ? port_y_dst : port_y_dst_buf;
+assign port_local_dst_tmp =  port_local_en ? port_local_dst : port_local_dst_buf;
+
+always@(posedge clk or negedge rst_n) begin
+	if(!rst_n) begin
+		port_x_dst_buf <= `EMPTY;
+		port_y_dst_buf <= `EMPTY;
+		port_local_dst_buf <= `EMPTY;
+	end
+	else begin
+		if(port_x_en)		port_x_dst_buf <= port_x_dst;
+		if(port_y_en)		port_y_dst_buf <= port_y_dst;
+		if(port_local_en)	port_local_dst_buf <= port_local_dst;
+	end
+end
 
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) begin
 		priority_x 			<= 1'b1;
-		priority_y 			<= 1'b0;
 		priority_local		<= 1'b0;
+		priority_y 			<= 1'b0;
 	end
 	else if(en) begin
 		priority_x 			<= priority_local;
@@ -63,11 +91,11 @@ always@(posedge clk or negedge rst_n) begin
 		port_local_valid 	<= 0;
 	end
 	else begin
-		if(port_x_dst != `EMPTY) port_x_valid <= 1;
+		if(port_x_dst_tmp != `EMPTY) port_x_valid <= 1;
 		else					port_x_valid <= 0;
-		if(port_y_dst != `EMPTY) port_y_valid <= 1;
+		if(port_y_dst_tmp != `EMPTY) port_y_valid <= 1;
 		else					port_y_valid <= 0;
-		if(port_local_dst != `EMPTY) port_local_valid <= 1;
+		if(port_local_dst_tmp != `EMPTY) port_local_valid <= 1;
 		else					port_local_valid <= 0;
 	end
 end
@@ -76,13 +104,13 @@ end
 // out_local_port
 always@(*) begin
 	if(priority_local) begin
-		if(port_local_dst == `OUT_LOCAL_PORT) begin
+		if(port_local_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x_dst == `OUT_LOCAL_PORT) begin
+		else if(port_x_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_X1;
 		end
-		else if(port_y_dst == `OUT_LOCAL_PORT) begin
+		else if(port_y_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_Y1;
 		end
 		else begin
@@ -90,13 +118,13 @@ always@(*) begin
 		end
 	end
 	else if(priority_x) begin
-		if(port_x_dst == `OUT_LOCAL_PORT) begin
+		if(port_x_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_X1;
 		end
-		else if(port_y_dst == `OUT_LOCAL_PORT) begin
+		else if(port_y_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_LOCAL_PORT) begin
+		else if(port_local_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_LOCAL;
 		end
 		else  begin
@@ -104,13 +132,13 @@ always@(*) begin
 		end
 	end
 	else if(priority_y) begin
-		if(port_y_dst == `OUT_LOCAL_PORT) begin
+		if(port_y_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_LOCAL_PORT) begin
+		else if(port_local_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x_dst == `OUT_LOCAL_PORT) begin
+		else if(port_x_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_X1;
 		end
 		else  begin
@@ -123,13 +151,13 @@ end
 // out_x_port
 always@(*) begin
 	if(priority_local) begin
-		if(port_local_dst == `OUT_X1_PORT) begin
+		if(port_local_dst_tmp == `OUT_X1_PORT) begin
 			out_x_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x_dst == `OUT_X1_PORT) begin
+		else if(port_x_dst_tmp == `OUT_X1_PORT) begin
 			out_x_sw_temp = `SW_X1;
 		end
-		else if(port_y_dst == `OUT_X1_PORT) begin
+		else if(port_y_dst_tmp == `OUT_X1_PORT) begin
 			out_x_sw_temp = `SW_Y1;
 		end
 		else begin
@@ -137,13 +165,13 @@ always@(*) begin
 		end
 	end
 	else if(priority_x) begin
-		if(port_x_dst == `OUT_X1_PORT)  begin
+		if(port_x_dst_tmp == `OUT_X1_PORT)  begin
 			out_x_sw_temp = `SW_X1;
 		end
-		else if(port_y_dst == `OUT_X1_PORT) begin
+		else if(port_y_dst_tmp == `OUT_X1_PORT) begin
 			out_x_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_X1_PORT) begin
+		else if(port_local_dst_tmp == `OUT_X1_PORT) begin
 			out_x_sw_temp = `SW_LOCAL;
 		end
 		else  begin
@@ -151,13 +179,13 @@ always@(*) begin
 		end
 	end
 	else if(priority_y) begin
-		if(port_y_dst == `OUT_X1_PORT) begin
+		if(port_y_dst_tmp == `OUT_X1_PORT) begin
 			out_x_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_X1_PORT) begin
+		else if(port_local_dst_tmp == `OUT_X1_PORT) begin
 			out_x_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x_dst == `OUT_X1_PORT) begin
+		else if(port_x_dst_tmp == `OUT_X1_PORT) begin
 			out_x_sw_temp = `SW_X1;
 		end
 		else  begin
@@ -170,13 +198,13 @@ end
 // out_y_port
 always@(*) begin
 	if(priority_local) begin
-		if(port_local_dst == `OUT_Y1_PORT) begin
+		if(port_local_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x_dst == `OUT_Y1_PORT) begin
+		else if(port_x_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_X1;
 		end
-		else if(port_y_dst == `OUT_Y1_PORT) begin
+		else if(port_y_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_Y1;
 		end
 		else begin
@@ -184,13 +212,13 @@ always@(*) begin
 		end
 	end
 	else if(priority_x) begin
-		if(port_x_dst == `OUT_Y1_PORT) begin
+		if(port_x_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_X1;
 		end
-		else if(port_y_dst == `OUT_Y1_PORT) begin
+		else if(port_y_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_Y1_PORT) begin
+		else if(port_local_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_LOCAL;
 		end
 		else  begin
@@ -198,13 +226,13 @@ always@(*) begin
 		end
 	end
 	else if(priority_y) begin
-		if(port_y_dst == `OUT_Y1_PORT) begin
+		if(port_y_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_Y1_PORT) begin
+		else if(port_local_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x_dst == `OUT_Y1_PORT) begin
+		else if(port_x_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_X1;
 		end
 		else  begin
@@ -228,6 +256,11 @@ module switch_allocation_4port
 	input	[2:0]		port_y_dst		,
 	input	[2:0]		port_x2_dst		,
 	input	[2:0]		port_local_dst	,
+	
+	input 				port_x1_en,
+	input 				port_x2_en,
+	input 				port_y_en,
+	input 				port_local_en,
 	
 	//input vaild
 	output reg			port_x1_valid,
@@ -253,6 +286,35 @@ reg [2:0] out_x2_sw_temp;
 reg [2:0] out_y_sw_temp;
 reg [2:0] out_local_sw_temp;
 
+reg [2:0] port_x1_dst_buf;
+reg [2:0] port_x2_dst_buf;
+reg [2:0] port_y_dst_buf;
+reg [2:0] port_local_dst_buf;
+wire [2:0] port_x1_dst_tmp;
+wire [2:0] port_x2_dst_tmp;
+wire [2:0] port_y_dst_tmp;
+wire [2:0] port_local_dst_tmp;
+
+
+assign port_x1_dst_tmp = port_x1_en ? port_x1_dst : port_x1_dst_buf;
+assign port_x2_dst_tmp = port_x2_en ? port_x2_dst : port_x2_dst_buf;
+assign port_y_dst_tmp =  port_y_en ? port_y_dst : port_y_dst_buf;
+assign port_local_dst_tmp =  port_local_en ? port_local_dst : port_local_dst_buf;
+
+always@(posedge clk or negedge rst_n) begin
+	if(!rst_n) begin
+		port_x1_dst_buf <= `EMPTY;
+		port_x2_dst_buf <= `EMPTY;
+		port_y_dst_buf <= `EMPTY;
+		port_local_dst_buf <= `EMPTY;
+	end
+	else begin
+		if(port_x1_en)		port_x1_dst_buf <= port_x1_dst;
+		if(port_x2_en)		port_x2_dst_buf <= port_x2_dst;
+		if(port_y_en)		port_y_dst_buf <= port_y_dst;
+		if(port_local_en)	port_local_dst_buf <= port_local_dst;
+	end
+end
 
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) begin
@@ -292,13 +354,13 @@ always@(posedge clk or negedge rst_n) begin
 		port_local_valid 	<= 0;
 	end
 	else begin
-		if(port_x1_dst != `EMPTY) port_x1_valid <= 1;
+		if(port_x1_dst_tmp != `EMPTY) port_x1_valid <= 1;
 		else					port_x1_valid <= 0;
-		if(port_x2_dst != `EMPTY) port_x2_valid <= 1;
+		if(port_x2_dst_tmp != `EMPTY) port_x2_valid <= 1;
 		else					port_x2_valid <= 0;
-		if(port_y_dst != `EMPTY) port_y_valid <= 1;
+		if(port_y_dst_tmp != `EMPTY) port_y_valid <= 1;
 		else					port_y_valid <= 0;
-		if(port_local_dst != `EMPTY) port_local_valid <= 1;
+		if(port_local_dst_tmp != `EMPTY) port_local_valid <= 1;
 		else					port_local_valid <= 0;
 	end
 end
@@ -307,16 +369,16 @@ end
 // out_local_port
 always@(*) begin
 	if(priority_local) begin
-		if(port_local_dst == `OUT_LOCAL_PORT) begin
+		if(port_local_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x1_dst == `OUT_LOCAL_PORT) begin
+		else if(port_x1_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_X1;
 		end
-		else if(port_x2_dst == `OUT_LOCAL_PORT) begin
+		else if(port_x2_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_X2;
 		end
-		else if(port_y_dst == `OUT_LOCAL_PORT) begin
+		else if(port_y_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_Y1;
 		end
 		else begin
@@ -324,16 +386,16 @@ always@(*) begin
 		end
 	end
 	else if(priority_x1) begin
-		if(port_x1_dst == `OUT_LOCAL_PORT) begin
+		if(port_x1_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_X1;
 		end
-		else if(port_x2_dst == `OUT_LOCAL_PORT) begin
+		else if(port_x2_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_X2;
 		end
-		else if(port_y_dst == `OUT_LOCAL_PORT) begin
+		else if(port_y_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_LOCAL_PORT) begin
+		else if(port_local_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_LOCAL;
 		end
 		else  begin
@@ -341,16 +403,16 @@ always@(*) begin
 		end
 	end
 	else if(priority_x2) begin
-		if(port_x2_dst == `OUT_LOCAL_PORT) begin
+		if(port_x2_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_X2;
 		end
-		else if(port_y_dst == `OUT_LOCAL_PORT) begin
+		else if(port_y_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_LOCAL_PORT) begin
+		else if(port_local_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x1_dst == `OUT_LOCAL_PORT) begin
+		else if(port_x1_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_X1;
 		end
 		else  begin
@@ -358,16 +420,16 @@ always@(*) begin
 		end
 	end
 	else if(priority_y) begin
-		if(port_y_dst == `OUT_LOCAL_PORT) begin
+		if(port_y_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_LOCAL_PORT) begin
+		else if(port_local_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x1_dst == `OUT_LOCAL_PORT) begin
+		else if(port_x1_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_X1;
 		end
-		else if(port_x2_dst == `OUT_LOCAL_PORT) begin
+		else if(port_x2_dst_tmp == `OUT_LOCAL_PORT) begin
 			out_local_sw_temp = `SW_X2;
 		end
 		else  begin
@@ -380,16 +442,16 @@ end
 // out_x1_port
 always@(*) begin
 	if(priority_local) begin
-		if(port_local_dst == `OUT_X1_PORT) begin
+		if(port_local_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x1_dst == `OUT_X1_PORT) begin
+		else if(port_x1_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_X1;
 		end
-		else if(port_x2_dst == `OUT_X1_PORT) begin
+		else if(port_x2_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_X2;
 		end
-		else if(port_y_dst == `OUT_X1_PORT) begin
+		else if(port_y_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_Y1;
 		end
 		else begin
@@ -397,16 +459,16 @@ always@(*) begin
 		end
 	end
 	else if(priority_x1) begin
-		if(port_x1_dst == `OUT_X1_PORT) begin
+		if(port_x1_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_X1;
 		end
-		else if(port_x2_dst == `OUT_X1_PORT) begin
+		else if(port_x2_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_X2;
 		end
-		else if(port_y_dst == `OUT_X1_PORT) begin
+		else if(port_y_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_X1_PORT) begin
+		else if(port_local_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_LOCAL;
 		end
 		else  begin
@@ -414,16 +476,16 @@ always@(*) begin
 		end
 	end
 	else if(priority_x2) begin
-		if(port_x2_dst == `OUT_X1_PORT) begin
+		if(port_x2_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_X2;
 		end
-		else if(port_y_dst == `OUT_X1_PORT) begin
+		else if(port_y_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_X1_PORT) begin
+		else if(port_local_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x1_dst == `OUT_X1_PORT) begin
+		else if(port_x1_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_X1;
 		end
 		else  begin
@@ -431,16 +493,16 @@ always@(*) begin
 		end
 	end
 	else if(priority_y) begin
-		if(port_y_dst == `OUT_X1_PORT) begin
+		if(port_y_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_X1_PORT) begin
+		else if(port_local_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x1_dst == `OUT_X1_PORT) begin
+		else if(port_x1_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_X1;
 		end
-		else if(port_x2_dst == `OUT_X1_PORT) begin
+		else if(port_x2_dst_tmp == `OUT_X1_PORT) begin
 			out_x1_sw_temp = `SW_X2;
 		end
 		else  begin
@@ -452,16 +514,16 @@ end
 // out_x2_port
 always@(*) begin
 	if(priority_local) begin
-		if(port_local_dst == `OUT_X2_PORT) begin
+		if(port_local_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x1_dst == `OUT_X2_PORT) begin
+		else if(port_x1_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_X1;
 		end
-		else if(port_x2_dst == `OUT_X2_PORT) begin
+		else if(port_x2_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_X2;
 		end
-		else if(port_y_dst == `OUT_X2_PORT) begin
+		else if(port_y_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_Y1;
 		end
 		else begin
@@ -469,16 +531,16 @@ always@(*) begin
 		end
 	end
 	else if(priority_x1) begin
-		if(port_x1_dst == `OUT_X2_PORT) begin
+		if(port_x1_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_X1;
 		end
-		else if(port_x2_dst == `OUT_X2_PORT) begin
+		else if(port_x2_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_X2;
 		end
-		else if(port_y_dst == `OUT_X2_PORT) begin
+		else if(port_y_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_X2_PORT) begin
+		else if(port_local_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_LOCAL;
 		end
 		else  begin
@@ -486,16 +548,16 @@ always@(*) begin
 		end
 	end
 	else if(priority_x2) begin
-		if(port_x2_dst == `OUT_X2_PORT) begin
+		if(port_x2_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_X2;
 		end
-		else if(port_y_dst == `OUT_X2_PORT) begin
+		else if(port_y_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_X2_PORT) begin
+		else if(port_local_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x1_dst == `OUT_X2_PORT) begin
+		else if(port_x1_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_X1;
 		end
 		else  begin
@@ -503,16 +565,16 @@ always@(*) begin
 		end
 	end
 	else if(priority_y) begin
-		if(port_y_dst == `OUT_X2_PORT) begin
+		if(port_y_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_X2_PORT) begin
+		else if(port_local_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x1_dst == `OUT_X2_PORT) begin
+		else if(port_x1_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_X1;
 		end
-		else if(port_x2_dst == `OUT_X2_PORT) begin
+		else if(port_x2_dst_tmp == `OUT_X2_PORT) begin
 			out_x2_sw_temp = `SW_X2;
 		end
 		else  begin
@@ -524,16 +586,16 @@ end
 // out_y_port
 always@(*) begin
 	if(priority_local) begin
-		if(port_local_dst == `OUT_Y1_PORT) begin
+		if(port_local_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x1_dst == `OUT_Y1_PORT) begin
+		else if(port_x1_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_X1;
 		end
-		else if(port_x2_dst == `OUT_Y1_PORT) begin
+		else if(port_x2_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_X2;
 		end
-		else if(port_y_dst == `OUT_Y1_PORT) begin
+		else if(port_y_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_Y1;
 		end
 		else begin
@@ -541,16 +603,16 @@ always@(*) begin
 		end
 	end
 	else if(priority_x1) begin
-		if(port_x1_dst == `OUT_Y1_PORT) begin
+		if(port_x1_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_X1;
 		end
-		else if(port_x2_dst == `OUT_Y1_PORT) begin
+		else if(port_x2_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_X2;
 		end
-		else if(port_y_dst == `OUT_Y1_PORT) begin
+		else if(port_y_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_Y1_PORT) begin
+		else if(port_local_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_LOCAL;
 		end
 		else  begin
@@ -558,16 +620,16 @@ always@(*) begin
 		end
 	end
 	else if(priority_x2) begin
-		if(port_x2_dst == `OUT_Y1_PORT) begin
+		if(port_x2_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_X2;
 		end
-		else if(port_y_dst == `OUT_Y1_PORT) begin
+		else if(port_y_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_Y1_PORT) begin
+		else if(port_local_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x1_dst == `OUT_Y1_PORT) begin
+		else if(port_x1_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_X1;
 		end
 		else  begin
@@ -575,16 +637,16 @@ always@(*) begin
 		end
 	end
 	else if(priority_y) begin
-		if(port_y_dst == `OUT_Y1_PORT) begin
+		if(port_y_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_Y1;
 		end
-		else if(port_local_dst == `OUT_Y1_PORT) begin
+		else if(port_local_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_LOCAL;
 		end
-		else if(port_x1_dst == `OUT_Y1_PORT) begin
+		else if(port_x1_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_X1;
 		end
-		else if(port_x2_dst == `OUT_Y1_PORT) begin
+		else if(port_x2_dst_tmp == `OUT_Y1_PORT) begin
 			out_y_sw_temp = `SW_X2;
 		end
 		else  begin

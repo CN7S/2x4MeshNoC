@@ -5,6 +5,10 @@ reg clk;
 reg rst_n;
 reg en;
 
+reg en_x;
+reg en_y;
+reg en_local;
+
 reg [2:0] port_x1_dst;
 reg [2:0] port_x2_dst;
 reg [2:0] port_y_dst;
@@ -32,6 +36,9 @@ initial begin
 	clk = 0;
 	rst_n = 0;
 	en = 0;
+	en_x = 0;
+	en_y = 0;
+	en_local = 0;
 	port_x1_dst = 0;
 	port_x2_dst = 0;
 	port_y_dst = 0;
@@ -46,7 +53,24 @@ initial begin
 	
 #10	rst_n = 1;
 	en = 1;
-	init_done = 1;                                                                                                                                                                                                                                                                                                                                                                                                   
+	en_x = 1;
+	en_y = 1;
+	en_local = 1;
+	init_done = 1;   
+
+#640;
+
+#100 en_x = 0;
+#100 en_x = 1;
+
+#100 en_y = 0;
+#100 en_y = 1;
+
+#100 en_local = 0;
+#100 en_local = 1;
+	
+	
+#100 $finish;
 end
 
 
@@ -67,9 +91,9 @@ end
 
 always@(posedge clk) begin
 	if(init_done) begin
-		port_local_dst_tmp <= port_local_dst;
-		port_x1_dst_tmp <= port_x1_dst;
-		port_y_dst_tmp <= port_y_dst;
+		if(en_local) port_local_dst_tmp <= port_local_dst;
+		if(en_x) port_x1_dst_tmp <= port_x1_dst;
+		if(en_y) port_y_dst_tmp <= port_y_dst;
 	end
 end
 
@@ -98,6 +122,10 @@ switch_allocation_3port sa3port_unit(
 	.port_y_dst(port_y_dst),
 	.port_local_dst(port_local_dst),
 	
+	.port_x_en(en_x),
+	.port_y_en(en_y),
+	.port_local_en(en_local),
+	
 	.out_x_sw(out_x1_sw),
 	.out_y_sw(out_y_sw),
 	.out_local_sw(out_local_sw)
@@ -113,6 +141,12 @@ module SA4port_tb();
 reg clk;
 reg rst_n;
 reg en;
+
+reg en_x1;
+reg en_x2;
+reg en_y;
+reg en_local;
+
 
 reg [2:0] port_x1_dst;
 reg [2:0] port_x2_dst;
@@ -141,6 +175,10 @@ initial begin
 	clk = 0;
 	rst_n = 0;
 	en = 0;
+	en_x1 = 0;
+	en_x2 = 0;
+	en_y = 0;
+	en_local = 0;
 	port_x1_dst = 0;
 	port_x2_dst = 0;
 	port_y_dst = 0;
@@ -155,6 +193,10 @@ initial begin
 	
 #10	rst_n = 1;
 	en = 1;
+	en_x1 = 1;
+	en_x2 = 1;
+	en_y = 1;
+	en_local = 1;
 	init_done = 1;                                                                                                                                                                                                                                                                                                                                                                                                   
 end
 
@@ -177,10 +219,10 @@ end
 
 always@(posedge clk) begin
 	if(init_done) begin
-		port_local_dst_tmp <= port_local_dst;
-		port_x1_dst_tmp <= port_x1_dst;
-		port_x2_dst_tmp <= port_x2_dst;
-		port_y_dst_tmp <= port_y_dst;
+		if(en_local) port_local_dst_tmp <= port_local_dst;
+		if(en_x1) port_x1_dst_tmp <= port_x1_dst;
+		if(en_x2) port_x2_dst_tmp <= port_x2_dst;
+		if(en_y) port_y_dst_tmp <= port_y_dst;
 	end
 end
 
@@ -207,7 +249,7 @@ always@(posedge clk) begin
 end
 
 
-switch_allocation_4port sa3port_unit(
+switch_allocation_4port sa4port_unit(
 	.clk(clk),
 	.rst_n(rst_n),
 	.en(en),
@@ -216,6 +258,11 @@ switch_allocation_4port sa3port_unit(
 	.port_x2_dst(port_x2_dst),
 	.port_y_dst(port_y_dst),
 	.port_local_dst(port_local_dst),
+	
+	.port_x1_en(en_x1),
+	.port_x2_en(en_x2),
+	.port_y_en(en_y),
+	.port_local_en(en_local),
 	
 	.out_x1_sw(out_x1_sw),
 	.out_x2_sw(out_x2_sw),
