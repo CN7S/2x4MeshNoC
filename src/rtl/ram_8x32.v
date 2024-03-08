@@ -32,8 +32,10 @@ always@(posedge wr_clk or negedge rst_n) begin
 end
 
 // read
-always@(posedge rd_clk) begin
-	if(rd_en)
+always@(posedge rd_clk or negedge rst_n) begin
+	if(!rst_n)
+		rd_data <= {(`DATA_WIDTH){1'b0}};
+	else if(rd_en)
 		rd_data <= dual_port_ram[rd_addr];
 	else 
 		rd_data <= {(`DATA_WIDTH){1'b0}};

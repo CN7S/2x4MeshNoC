@@ -32,51 +32,51 @@ parameter [23:0] SIX_ID_PAR  = {3'd5,3'd5,3'd6,3'd6,3'd6,3'd6,3'd6,3'd6};
 parameter [23:0] SEV_ID_PAR  = {3'd6,3'd7,3'd7,3'd7,3'd7,3'd7,3'd7,3'd7};
 
 // border
-wire [`DATA_WIDTH-1:0][3:0] LOCAL_DATA_IN_border;
+wire [3:0][`DATA_WIDTH-1:0] LOCAL_DATA_IN_border;
 wire   [3:0] LOCAL_DATA_VALID_IN_border;
-wire [`DATA_WIDTH-1:0][3:0] LOCAL_DATA_OUT_border;
+wire [3:0][`DATA_WIDTH-1:0] LOCAL_DATA_OUT_border;
 wire   [3:0] LOCAL_DATA_VALID_OUT_border;
 wire   [3:0] LOCAL_FULL_OUT_border;
 
-wire [`DATA_WIDTH-1:0][3:0] X_DATA_IN_border;
+wire [3:0][`DATA_WIDTH-1:0] X_DATA_IN_border;
 wire   [3:0] X_DATA_VALID_IN_border;
 wire   [3:0] X_FULL_IN_border;
-wire [`DATA_WIDTH-1:0][3:0] X_DATA_OUT_border;
+wire [3:0][`DATA_WIDTH-1:0] X_DATA_OUT_border;
 wire   [3:0] X_DATA_VALID_OUT_border;
 wire   [3:0] X_FULL_OUT_border;
 
-wire [`DATA_WIDTH-1:0][3:0] Y_DATA_IN_border;
+wire [3:0][`DATA_WIDTH-1:0] Y_DATA_IN_border;
 wire   [3:0] Y_DATA_VALID_IN_border;
 wire   [3:0] Y_FULL_IN_border;
-wire [`DATA_WIDTH-1:0][3:0] Y_DATA_OUT_border;
+wire [3:0][`DATA_WIDTH-1:0] Y_DATA_OUT_border;
 wire   [3:0] Y_DATA_VALID_OUT_border;
 wire   [3:0] Y_FULL_OUT_border;
 
 // normal
-wire [`DATA_WIDTH-1:0][3:0] LOCAL_DATA_IN_normal;
+wire [3:0][`DATA_WIDTH-1:0] LOCAL_DATA_IN_normal;
 wire   [3:0] LOCAL_DATA_VALID_IN_normal;
-wire [`DATA_WIDTH-1:0][3:0] LOCAL_DATA_OUT_normal;
+wire [3:0][`DATA_WIDTH-1:0] LOCAL_DATA_OUT_normal;
 wire   [3:0] LOCAL_DATA_VALID_OUT_normal;
 wire   [3:0] LOCAL_FULL_OUT_normal;
 
-wire [`DATA_WIDTH-1:0][3:0] X1_DATA_IN_normal;
+wire [3:0][`DATA_WIDTH-1:0] X1_DATA_IN_normal;
 wire   [3:0] X1_DATA_VALID_IN_normal;
 wire   [3:0] X1_FULL_IN_normal;
-wire [`DATA_WIDTH-1:0][3:0] X1_DATA_OUT_normal;
+wire [3:0][`DATA_WIDTH-1:0] X1_DATA_OUT_normal;
 wire   [3:0] X1_DATA_VALID_OUT_normal;
 wire   [3:0] X1_FULL_OUT_normal;
 
-wire [`DATA_WIDTH-1:0][3:0] X2_DATA_IN_normal;
+wire [3:0][`DATA_WIDTH-1:0] X2_DATA_IN_normal;
 wire   [3:0] X2_DATA_VALID_IN_normal;
 wire   [3:0] X2_FULL_IN_normal;
-wire [`DATA_WIDTH-1:0][3:0] X2_DATA_OUT_normal;
+wire [3:0][`DATA_WIDTH-1:0] X2_DATA_OUT_normal;
 wire   [3:0] X2_DATA_VALID_OUT_normal;
 wire   [3:0] X2_FULL_OUT_normal;
 
-wire [`DATA_WIDTH-1:0][3:0] Y_DATA_IN_normal;
+wire [3:0][`DATA_WIDTH-1:0] Y_DATA_IN_normal;
 wire   [3:0] Y_DATA_VALID_IN_normal;
 wire   [3:0] Y_FULL_IN_normal;
-wire [`DATA_WIDTH-1:0][3:0] Y_DATA_OUT_normal;
+wire [3:0][`DATA_WIDTH-1:0] Y_DATA_OUT_normal;
 wire   [3:0] Y_DATA_VALID_OUT_normal;
 wire   [3:0] Y_FULL_OUT_normal;
 
@@ -84,26 +84,26 @@ wire   [3:0] Y_FULL_OUT_normal;
 
 wire [7:0] enable_wire;
 wire [7:0] dbg_mode_wire;
-wire [2:0][7:0] send_num_wire;
-wire [2:0][7:0] receive_num_wire;
-wire [3:0][7:0] rate_wire;
-wire [23:0][7:0] dst_seq_wire;
-wire [3:0][7:0] mode_wire;
+wire [7:0][2:0] send_num_wire;
+wire [7:0][2:0] receive_num_wire;
+wire [7:0][3:0] rate_wire;
+wire [7:0][23:0] dst_seq_wire;
+wire [7:0][3:0] mode_wire;
 wire [7:0] flush_wire;
 
 wire [7:0] task_send_finish_flag;
 wire [7:0] task_receive_finish_flag;
 
-wire [6:0][7:0] so_retrsreq_receive_flag;
+wire [7:0][6:0] so_retrsreq_receive_flag;
 wire [7:0][7:0] so_retrsreq_receive_num;
-wire [6:0][7:0] so_retrsreq_send_flag;
+wire [7:0][6:0] so_retrsreq_send_flag;
 wire [7:0][7:0] so_retrsreq_send_num;
-wire [7:0] latency_max;
-wire [7:0] latency_min;
-wire [7:0] latency_sum;
+wire [7:0][7:0] latency_max;
+wire [7:0][7:0] latency_min;
+wire [7:0][26:0] latency_sum;
 
-wire [31:0][7:0] data_p2r;
-wire [31:0][7:0] data_r2p;
+wire [7:0][31:0] data_p2r;
+wire [7:0][31:0] data_r2p;
 wire [7:0] valid_p2r;
 wire [7:0] valid_r2p;
 wire [7:0] full;
@@ -113,15 +113,23 @@ wire [7:0] full;
 	// router interconnect
 assign LOCAL_DATA_IN_border = {data_p2r[7], data_p2r[4], data_p2r[3], data_p2r[0]};
 assign LOCAL_DATA_VALID_IN_border = {valid_p2r[7], valid_p2r[4], valid_p2r[3], valid_p2r[0]};
+
+/*
 assign LOCAL_DATA_OUT_border = {data_r2p[7], data_r2p[4], data_r2p[3], data_r2p[0]};
 assign LOCAL_DATA_VALID_OUT_border = {valid_r2p[7], valid_r2p[4], valid_r2p[3], valid_r2p[0]};
 assign LOCAL_FULL_OUT_border = {full[7], full[4], full[3], full[0]};
+*/
+
+
 
 assign LOCAL_DATA_IN_normal = {data_p2r[6], data_p2r[5], data_p2r[2], data_p2r[1]};
 assign LOCAL_DATA_VALID_IN_normal = {valid_p2r[6], valid_p2r[5], valid_p2r[2], valid_p2r[1]};
+
+/*
 assign LOCAL_DATA_OUT_normal = {data_r2p[6], data_r2p[5], data_r2p[2], data_r2p[1]};
 assign LOCAL_DATA_VALID_OUT_normal = {valid_r2p[6], valid_r2p[5], valid_r2p[2], valid_r2p[1]};
 assign LOCAL_FULL_OUT_normal = {full[6], full[5], full[2], full[1]};
+*/
 
 assign X_DATA_IN_border = {X2_DATA_OUT_normal[3], X1_DATA_OUT_normal[2], X2_DATA_OUT_normal[1], X1_DATA_OUT_normal[0]};
 assign X_DATA_VALID_IN_border = {X2_DATA_VALID_OUT_normal[3], X1_DATA_VALID_OUT_normal[2], X2_DATA_VALID_OUT_normal[1], X1_DATA_VALID_OUT_normal[0]};
@@ -145,6 +153,20 @@ assign Y_FULL_IN_normal = {Y_FULL_OUT_normal[1], Y_FULL_OUT_normal[0], Y_FULL_OU
 
 	//pe interconnect
 
+
+assign data_r2p = {LOCAL_DATA_OUT_border[3], LOCAL_DATA_OUT_normal[3], 
+					LOCAL_DATA_OUT_normal[2], LOCAL_DATA_OUT_border[2], 
+					LOCAL_DATA_OUT_border[1], LOCAL_DATA_OUT_normal[1], 
+					LOCAL_DATA_OUT_normal[0], LOCAL_DATA_OUT_border[0]};
+assign valid_r2p = {LOCAL_DATA_VALID_OUT_border[3], LOCAL_DATA_VALID_OUT_normal[3],
+					LOCAL_DATA_VALID_OUT_normal[2], LOCAL_DATA_VALID_OUT_border[2],
+					LOCAL_DATA_VALID_OUT_border[1], LOCAL_DATA_VALID_OUT_normal[1],
+					LOCAL_DATA_VALID_OUT_normal[0], LOCAL_DATA_VALID_OUT_border[0]};
+assign full = {LOCAL_FULL_OUT_border[3], LOCAL_FULL_OUT_normal[3],
+				LOCAL_FULL_OUT_border[2], LOCAL_FULL_OUT_normal[2],
+				LOCAL_FULL_OUT_border[1], LOCAL_FULL_OUT_normal[1],
+				LOCAL_FULL_OUT_border[0], LOCAL_FULL_OUT_normal[0]};
+
 assign enable_wire = pe_enable;
 assign dbg_mode_wire = pe_dbg_mode_wire;
 assign send_num_wire = pe_send_num_wire;
@@ -154,8 +176,8 @@ assign dst_seq_wire = pe_dst_seq_wire;
 assign mode_wire = pe_mode_wire;
 assign flush_wire = pe_flush_wire;
 
-assign task_receive_finish_flag = pe_task_receive_finish_flag;
-assign task_send_finish_flag = pe_task_send_finish_flag;
+assign pe_task_receive_finish_flag = task_receive_finish_flag;
+assign pe_task_send_finish_flag = task_send_finish_flag;
 
 
 genvar gen;
@@ -183,7 +205,7 @@ generate
 				
 				.X_DATA_OUT(X_DATA_OUT_border[gen]),
 				.X_DATA_VALID_OUT(X_DATA_VALID_OUT_border[gen]),
-				.X_FULL_OUT(X_FULL_IN_border[gen]),
+				.X_FULL_OUT(X_FULL_OUT_border[gen]),
 				
 				
 				.Y_DATA_IN(Y_DATA_IN_border[gen]),
@@ -191,7 +213,7 @@ generate
 				.Y_FULL_IN(Y_FULL_IN_border[gen]),
 				
 				.Y_DATA_OUT(Y_DATA_OUT_border[gen]),
-				.Y_DATA_VALID_OUT(Y_DATA_VALID_IN_border[gen]),
+				.Y_DATA_VALID_OUT(Y_DATA_VALID_OUT_border[gen]),
 				.Y_FULL_OUT(Y_FULL_OUT_border[gen])
 			);
 		else
