@@ -163,9 +163,9 @@ assign valid_r2p = {LOCAL_DATA_VALID_OUT_border[3], LOCAL_DATA_VALID_OUT_normal[
 					LOCAL_DATA_VALID_OUT_border[1], LOCAL_DATA_VALID_OUT_normal[1],
 					LOCAL_DATA_VALID_OUT_normal[0], LOCAL_DATA_VALID_OUT_border[0]};
 assign full = {LOCAL_FULL_OUT_border[3], LOCAL_FULL_OUT_normal[3],
-				LOCAL_FULL_OUT_border[2], LOCAL_FULL_OUT_normal[2],
+				LOCAL_FULL_OUT_normal[2], LOCAL_FULL_OUT_border[2],
 				LOCAL_FULL_OUT_border[1], LOCAL_FULL_OUT_normal[1],
-				LOCAL_FULL_OUT_border[0], LOCAL_FULL_OUT_normal[0]};
+				LOCAL_FULL_OUT_normal[0], LOCAL_FULL_OUT_border[0]};
 
 assign enable_wire = pe_enable;
 assign dbg_mode_wire = pe_dbg_mode_wire;
