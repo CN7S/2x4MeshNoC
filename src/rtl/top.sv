@@ -218,7 +218,7 @@ generate
 			);
 		else
 			router_normal #(
-			.ROUTER_ADDRESS(ROUTER_ADDRESS_PAR[gen])
+			.ROUTER_ADDRESS(ROUTER_ADDRESS_PAR[3*gen+2:3*gen])
 			)router_unit
 			(
 				.clk(clk),

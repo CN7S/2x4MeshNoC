@@ -253,8 +253,8 @@ module switch_allocation_4port
 	
 	// input_dst
 	input	[2:0]		port_x1_dst		,
-	input	[2:0]		port_y_dst		,
 	input	[2:0]		port_x2_dst		,
+	input	[2:0]		port_y_dst		,
 	input	[2:0]		port_local_dst	,
 	
 	input 				port_x1_en,
