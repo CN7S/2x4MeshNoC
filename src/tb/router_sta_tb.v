@@ -23,7 +23,6 @@ router_sta_3port ROUTER_STA_3(
 .port(port)
 );
 
-
 initial
 begin
 	clk = 1;
@@ -43,13 +42,13 @@ begin
 	valid = 1;
 
 	#20
-	for (i=0; i<8; i=i+1)
+	for ( i=0; i<8; i=i+1)
 	begin
 		for (j=0; j<8; j=j+1)
 		begin
-      			#10 dst <= dst+1;
+      			#20 dst = dst+1;
 		end
-		router_add <= router_add+1;
+		router_add = router_add+1;
 	end
 	$finish;
 end
@@ -116,12 +115,6 @@ begin
 	end
 $finish;
 end
-
-always#5 clk = !clk;
-
-always#10 $display($realtime,,"router_add=%b,dst=%b,port=%b",router_add,dst,port);
-
-endmodule
 
 always#5 clk = !clk;
 
