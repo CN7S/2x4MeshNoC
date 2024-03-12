@@ -93,16 +93,14 @@ wire [2:0] port_sw_local;
 assign router_add = ROUTER_ADDRESS;
 
 // FIFO_IN
-async_fifo_8x32 unit_fifo_local(
-	.wr_clk(clk),
-	.wr_rst(rst_n),
+sync_fifo_8x32 unit_fifo_local(
+	.clk(clk),
+	.rst_n(rst_n),
 	.wr_en(LOCAL_DATA_VALID_IN),
 	.wr_data(LOCAL_DATA_IN),
 	.almost_full(fifo_almost_full_local),
 	.full(LOCAL_FULL_OUT),
 	
-	.rd_clk(clk),
-	.rd_rst(rst_n),
 	.rd_en(fifo_rd_en_local),
 	.rd_data(fifo_rd_data_local),
 	.almost_empty(fifo_almost_empty_local),
@@ -110,16 +108,14 @@ async_fifo_8x32 unit_fifo_local(
 );
 
 
-async_fifo_8x32 unit_fifo_x(
-	.wr_clk(clk),
-	.wr_rst(rst_n),
+sync_fifo_8x32 unit_fifo_x(
+	.clk(clk),
+	.rst_n(rst_n),
 	.wr_en(X_DATA_VALID_IN),
 	.wr_data(X_DATA_IN),
 	.almost_full(X_FULL_OUT),
 	.full(fifo_full_x),
 	
-	.rd_clk(clk),
-	.rd_rst(rst_n),
 	.rd_en(fifo_rd_en_x),
 	.rd_data(fifo_rd_data_x),
 	.almost_empty(fifo_almost_empty_x),
@@ -127,16 +123,14 @@ async_fifo_8x32 unit_fifo_x(
 );
 
 
-async_fifo_8x32 unit_fifo_y(
-	.wr_clk(clk),
-	.wr_rst(rst_n),
+sync_fifo_8x32 unit_fifo_y(
+	.clk(clk),
+	.rst_n(rst_n),
 	.wr_en(Y_DATA_VALID_IN),
 	.wr_data(Y_DATA_IN),
 	.almost_full(Y_FULL_OUT),
 	.full(fifo_full_y),
 	
-	.rd_clk(clk),
-	.rd_rst(rst_n),
 	.rd_en(fifo_rd_en_y),
 	.rd_data(fifo_rd_data_y),
 	.almost_empty(fifo_almost_empty_y),
