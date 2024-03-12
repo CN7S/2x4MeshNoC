@@ -3,21 +3,26 @@
  2x4 mesh NOC
  
 ## 代办 
-	1. router testbench
-	2. router 4port version
-	3. flow control testbench
-	4. 修改 router_sta_tb, 测试更新的router_sta
-	5. 构建2x4meshNOC, 已完成，未检验。
-	6. 2x4 mesh NOC testbench编写
 	
-	1. 修改routerSTA , 编写3port 版本和4port版本
-	2. 修改router， 使用新编写的routerSTA
-	3. debug
+	
+	1. mesh_tb.v 编写其余7种测试配置；
+	2. 编写router_tb.v 文件；
+	3. 重新修改原有tb文件，重测至正确；
+	4. 修改原有架构，适当重写代码；
+		1. fifo改为同步fifo。
+		2. 每个module单独文件，模块分类存放
+	
+	
+	
 
 
 
  ## NOC主要功能
  
+ 
+ 
  ## Router功能
+
+
 
 
