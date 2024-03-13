@@ -214,7 +214,7 @@ always@(posedge clk or negedge rst_n) begin
 end
 // BR
 
-	// x pipeline
+	// x pipeline buffer
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) begin
 		{buffer_x_vaild[0],buffer_x[0]} <= 0;
@@ -244,7 +244,7 @@ always@(posedge clk or negedge rst_n) begin
 		{buffer_x_vaild[2],buffer_x[2]} <= {buffer_x_vaild[1],buffer_x[1]};
 	end
 end
-	// y pipeline
+	// y pipeline buffer
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) begin
 		{buffer_y_vaild[0],buffer_y[0]} <= 0;
@@ -274,7 +274,7 @@ always@(posedge clk or negedge rst_n) begin
 		{buffer_y_vaild[2],buffer_y[2]} <= {buffer_y_vaild[1],buffer_y[1]};
 	end
 end
-	// local pipeline
+	// local pipeline buffer
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) begin
 		{buffer_local_vaild[0],buffer_local[0]} <= 0;
