@@ -170,5 +170,4 @@ end
 
 assign en_fifo_local = (en_local && !empty_local);
 
-
 endmodule
