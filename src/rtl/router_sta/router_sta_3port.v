@@ -1,3 +1,34 @@
+// +FHDR-----------------------------------------------------------------------
+// Copyright.
+// ----------------------------------------------------------------------------
+ // FILE NAME      : router_sta_3port.v
+ // DEPARTMENT     :
+ // AUTHOR         : Yi Wan
+ // AUTHOR’S EMAIL : wanyi2003@sjtu.edu.cn
+// ----------------------------------------------------------------------------
+// RELEASE HISTORY
+ // VERSION DATE        AUTHOR  DESCRIPTION
+ // 1.0  2024-03-13  Yi Wan     
+// ----------------------------------------------------------------------------
+// KEYWORDS    : 3-port static routing
+ // ----------------------------------------------------------------------------
+// PURPOSE     : Determine output port for a 3-port router.
+ // ----------------------------------------------------------------------------
+// PARAMETERS
+ //     PARAM NAME      RANGE    : DESCRIPTION       : DEFAULT : UNITS
+ // ----------------------------------------------------------------------------
+// REUSE ISSUES
+ //   Reset Strategy      :
+//   Clock Domains        :
+//   Critical Timing      :
+//   Test Features        :
+//   Asynchronous I/F     :
+//   Scan Methodology     :
+//   Instantiations       :
+//   Synthesizable (y/n)  :
+//   Other      		  :
+ // -FHDR-----------------------------------------------------------------------
+
 `include "global.v"
 
 module router_sta_3port
@@ -31,4 +62,3 @@ begin
 end
 
 endmodule
-
