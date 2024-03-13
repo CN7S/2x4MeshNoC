@@ -1,4 +1,35 @@
-'include"global.v"
+// +FHDR-----------------------------------------------------------------------
+// Copyright.
+// ----------------------------------------------------------------------------
+ // FILE NAME      : router_sta_sport.v
+ // DEPARTMENT     :
+ // AUTHOR         : Yi Wan
+ // AUTHOR’S EMAIL : wanyi2003@sjtu.edu.cn
+// ----------------------------------------------------------------------------
+// RELEASE HISTORY
+ // VERSION DATE        AUTHOR  DESCRIPTION
+ // 1.0  2024-03-13  Yi Wan     
+// ----------------------------------------------------------------------------
+// KEYWORDS    : 4-port static routing
+ // ----------------------------------------------------------------------------
+// PURPOSE     : Determine output port for a 4-port router.
+ // ----------------------------------------------------------------------------
+// PARAMETERS
+ //     PARAM NAME      RANGE    : DESCRIPTION       : DEFAULT : UNITS
+ // ----------------------------------------------------------------------------
+// REUSE ISSUES
+ //   Reset Strategy      :
+//   Clock Domains        :
+//   Critical Timing      :
+//   Test Features        :
+//   Asynchronous I/F     :
+//   Scan Methodology     :
+//   Instantiations       :
+//   Synthesizable (y/n)  :
+//   Other      		  :
+ // -FHDR-----------------------------------------------------------------------
+
+`include"global.v"
 
 module router_sta_4port
 (
@@ -16,25 +47,26 @@ module router_sta_4port
 always@(posedge clk or negedge rst_n) 
 begin
 	if (!rst_n) 
-		port <= `EMPTY;
+		port <= `EMPTY; 
 	else if (en)
 	begin
 		if(!valid)
-			port <= `EMPTY;
-		else if (router_add[1:0] != dst[1:0])
-		begin
-			if (router_add[1:0] < dst[1:0])
-				port <= `OUT_X2_PORT;
-			else 
-				port <= `OUT_X1_PORT;
-		end
+			port <= `EMPTY; 
 		else 
-		begin
-			if (router_add[2] != dst[2])
-				port <= `OUT_Y1_PORT;
+			if (router_add[1:0] != dst[1:0])
+			begin
+				if (router_add[1:0] < dst[1:0])
+					port <= `OUT_X2_PORT;
+				else 
+					port <= `OUT_X1_PORT;
+			end
 			else 
-				port <= `OUT_LOCAL_PORT;
-  		end
+			begin
+				if (router_add[2] != dst[2])
+					port <= `OUT_Y1_PORT;
+				else 
+					port <= `OUT_LOCAL_PORT;
+  			end
 	end
 end
 
