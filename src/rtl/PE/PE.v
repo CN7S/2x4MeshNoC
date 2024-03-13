@@ -1,5 +1,6 @@
 //Copyright [2024/2/16] [author: SJTUME208 / owner: DIC course 2024]
-//written by Xie Lin 
+//written by Lin Xie 
+//modified by Kun Su 2024/3/13
 
 `define DATA_SIZE 16
 `define DATA_SIZE_0 15
@@ -10,7 +11,8 @@
 `define ID_SIZE 3
 `define ID_SIZE_0 2
 `define ROUTER_NUM 8
-`define ROUTER_NUM_0 6
+//`define ROUTER_NUM_0 6
+`define ROUTER_NUM_0 7  //sukun
 `define LOG_ROUTER_NUM 3
 `define LOG_ROUTER_NUM_0 2
 `define ROUTER_WIDTH_0 23// ID_SIZE * ROUTER_NUM - 1
@@ -104,6 +106,7 @@ module PE#(
 
     reg[`TIME_MAX - `SRC_MIN:0] data_in_des_buf;
 
+    wire all_receive_flag_000;  //sukun
     wire all_receive_flag_001;
     wire all_receive_flag_010;
     wire all_receive_flag_011;
@@ -113,6 +116,7 @@ module PE#(
     wire all_receive_flag_111;
 //
     //retrs
+    wire so_retrsreq_receive_num_000;  //sukun
     wire so_retrsreq_receive_num_001;
     wire so_retrsreq_receive_num_010;
     wire so_retrsreq_receive_num_011;
@@ -121,6 +125,7 @@ module PE#(
     wire so_retrsreq_receive_num_110;
     wire so_retrsreq_receive_num_111;
 
+    wire so_retrsreq_send_num_000;  //sukun
     wire so_retrsreq_send_num_001;
     wire so_retrsreq_send_num_010;
     wire so_retrsreq_send_num_011;
@@ -142,6 +147,7 @@ module PE#(
     reg[`LOG_ROUTER_NUM_0:0]    data_miss_sum;
     reg[`LOG_ROUTER_NUM_0:0]    long_time_sum;
 
+    wire[`DATA_SIZE_0:0] seq_counter_000;  //sukun
     wire[`DATA_SIZE_0:0] seq_counter_001;
     wire[`DATA_SIZE_0:0] seq_counter_010;
     wire[`DATA_SIZE_0:0] seq_counter_011;
@@ -150,6 +156,7 @@ module PE#(
     wire[`DATA_SIZE_0:0] seq_counter_110;
     wire[`DATA_SIZE_0:0] seq_counter_111;
     //data tag
+    wire[`DATA_SIZE_0:0] diff_counter_000;  //sukun
     wire[`DATA_SIZE_0:0] diff_counter_001;
     wire[`DATA_SIZE_0:0] diff_counter_010;
     wire[`DATA_SIZE_0:0] diff_counter_011;
@@ -158,6 +165,7 @@ module PE#(
     wire[`DATA_SIZE_0:0] diff_counter_110;
     wire[`DATA_SIZE_0:0] diff_counter_111;
 
+    wire[`TIME_SIZE_0:0] receive_time_counter_000;  //sukun
     wire[`TIME_SIZE_0:0] receive_time_counter_001;
     wire[`TIME_SIZE_0:0] receive_time_counter_010;
     wire[`TIME_SIZE_0:0] receive_time_counter_011;
@@ -170,6 +178,7 @@ module PE#(
 //
     reg retrans_flag;
 
+    wire[`DATA_SIZE_0:0] retrans_counter_000;  //sukun
     wire[`DATA_SIZE_0:0] retrans_counter_001;
     wire[`DATA_SIZE_0:0] retrans_counter_010;
     wire[`DATA_SIZE_0:0] retrans_counter_011;
@@ -231,6 +240,56 @@ module PE#(
         mode <= mode_wire;
     end
 
+// 000  //sukun
+    PE_single #(
+    .MY_ID(MY_ID),
+    .TAR_ID(MY_ID),
+
+    //for retry request
+    .NORMAL_BAG(NORMAL_BAG)
+    ) PE_single_001(
+    .dbg_mode(dbg_mode),
+    .enable(enable),
+    .data_r2p(data_r2p),
+    .valid_r2p(valid_r2p),
+    .data_p2r({data_p2r[`SRC_MAX:`SRC_MIN], data_p2r[`DST_MAX:`DST_MIN]}),
+    .valid_p2r(valid_p2r),
+    //basic flags
+    .valid_in_flag(valid_in_flag),
+    .normal_in_flag(normal_in_flag),
+    .request_in_flag(request_in_flag),
+    .retrans_in_flag(retrans_in_flag),
+    .task_send_finish_flag(task_send_finish_flag),
+    .data_in_des_buf(data_in_des_buf),
+    .all_receive_flag(all_receive_flag_000),
+
+    //data receive miss
+    .long_time(long_time),
+    .seq_counter(seq_counter_000),
+    .diff_counter(diff_counter_000),
+    .receive_time_counter(receive_time_counter_000),
+    .data_miss_flag(data_miss_counter[0]),
+    .long_time_flag(long_time_counter[0]),
+    .so_retrsreq_send_num(so_retrsreq_send_num_000),
+    .so_retrsreq_send_flag(so_retrsreq_send_flag[0]),
+
+    //send miss
+    .retrans_counter(retrans_counter_000),
+    .so_retrsreq_receive_num(so_retrsreq_receive_num_000),
+    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[0]),
+
+    //output flags
+    .request_out_flag(request_out_flag),
+    .retrans_out_flag(retrans_out_flag),
+    .hold_out_flag(hold_out_flag),
+
+    //dst
+    .request_dst(request_dst),
+    .retrans_dst(retrans_dst),
+
+    .clk(clk),
+    .rst_n(rst_n)
+    );
 // 001
     PE_single #(
     .MY_ID(MY_ID),
@@ -238,7 +297,7 @@ module PE#(
 
     //for retry request
     .NORMAL_BAG(NORMAL_BAG)
-    ) PE_single_001(
+    ) PE_single_000(
     .dbg_mode(dbg_mode),
     .enable(enable),
     .data_r2p(data_r2p),
@@ -259,15 +318,15 @@ module PE#(
     .seq_counter(seq_counter_001),
     .diff_counter(diff_counter_001),
     .receive_time_counter(receive_time_counter_001),
-    .data_miss_flag(data_miss_counter[0]),
-    .long_time_flag(long_time_counter[0]),
+    .data_miss_flag(data_miss_counter[1]),
+    .long_time_flag(long_time_counter[1]),
     .so_retrsreq_send_num(so_retrsreq_send_num_001),
-    .so_retrsreq_send_flag(so_retrsreq_send_flag[0]),
+    .so_retrsreq_send_flag(so_retrsreq_send_flag[1]),
 
     //send miss
     .retrans_counter(retrans_counter_001),
     .so_retrsreq_receive_num(so_retrsreq_receive_num_001),
-    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[0]),
+    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[1]),
 
     //output flags
     .request_out_flag(request_out_flag),
@@ -309,15 +368,15 @@ module PE#(
     .seq_counter(seq_counter_010),
     .diff_counter(diff_counter_010),
     .receive_time_counter(receive_time_counter_010),
-    .data_miss_flag(data_miss_counter[1]),
-    .long_time_flag(long_time_counter[1]),
+    .data_miss_flag(data_miss_counter[2]),
+    .long_time_flag(long_time_counter[2]),
     .so_retrsreq_send_num(so_retrsreq_send_num_010),
-    .so_retrsreq_send_flag(so_retrsreq_send_flag[1]),
+    .so_retrsreq_send_flag(so_retrsreq_send_flag[2]),
 
     //send miss
     .retrans_counter(retrans_counter_010),
     .so_retrsreq_receive_num(so_retrsreq_receive_num_010),
-    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[1]),
+    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[2]),
 
     //output flags
     .request_out_flag(request_out_flag),
@@ -360,15 +419,15 @@ module PE#(
     .seq_counter(seq_counter_011),
     .diff_counter(diff_counter_011),
     .receive_time_counter(receive_time_counter_011),
-    .data_miss_flag(data_miss_counter[2]),
-    .long_time_flag(long_time_counter[2]),
+    .data_miss_flag(data_miss_counter[3]),
+    .long_time_flag(long_time_counter[3]),
     .so_retrsreq_send_num(so_retrsreq_send_num_011),
-    .so_retrsreq_send_flag(so_retrsreq_send_flag[2]),
+    .so_retrsreq_send_flag(so_retrsreq_send_flag[3]),
 
     //send miss
     .retrans_counter(retrans_counter_011),
     .so_retrsreq_receive_num(so_retrsreq_receive_num_011),
-    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[2]),
+    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[3]),
 
     //output flags
     .request_out_flag(request_out_flag),
@@ -411,15 +470,15 @@ module PE#(
     .seq_counter(seq_counter_100),
     .diff_counter(diff_counter_100),
     .receive_time_counter(receive_time_counter_100),
-    .data_miss_flag(data_miss_counter[3]),
-    .long_time_flag(long_time_counter[3]),
+    .data_miss_flag(data_miss_counter[4]),
+    .long_time_flag(long_time_counter[4]),
     .so_retrsreq_send_num(so_retrsreq_send_num_100),
-    .so_retrsreq_send_flag(so_retrsreq_send_flag[3]),
+    .so_retrsreq_send_flag(so_retrsreq_send_flag[4]),
 
     //send miss
     .retrans_counter(retrans_counter_100),
     .so_retrsreq_receive_num(so_retrsreq_receive_num_100),
-    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[3]),
+    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[4]),
 
     //output flags
     .request_out_flag(request_out_flag),
@@ -462,15 +521,15 @@ module PE#(
     .seq_counter(seq_counter_101),
     .diff_counter(diff_counter_101),
     .receive_time_counter(receive_time_counter_101),
-    .data_miss_flag(data_miss_counter[4]),
-    .long_time_flag(long_time_counter[4]),
+    .data_miss_flag(data_miss_counter[5]),
+    .long_time_flag(long_time_counter[5]),
     .so_retrsreq_send_num(so_retrsreq_send_num_101),
-    .so_retrsreq_send_flag(so_retrsreq_send_flag[4]),
+    .so_retrsreq_send_flag(so_retrsreq_send_flag[5]),
 
     //send miss
     .retrans_counter(retrans_counter_101),
     .so_retrsreq_receive_num(so_retrsreq_receive_num_101),
-    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[4]),
+    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[5]),
 
     //output flags
     .request_out_flag(request_out_flag),
@@ -513,15 +572,15 @@ module PE#(
     .seq_counter(seq_counter_110),
     .diff_counter(diff_counter_110),
     .receive_time_counter(receive_time_counter_110),
-    .data_miss_flag(data_miss_counter[5]),
-    .long_time_flag(long_time_counter[5]),
+    .data_miss_flag(data_miss_counter[6]),
+    .long_time_flag(long_time_counter[6]),
     .so_retrsreq_send_num(so_retrsreq_send_num_110),
-    .so_retrsreq_send_flag(so_retrsreq_send_flag[5]),
+    .so_retrsreq_send_flag(so_retrsreq_send_flag[6]),
 
     //send miss
     .retrans_counter(retrans_counter_110),
     .so_retrsreq_receive_num(so_retrsreq_receive_num_110),
-    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[5]),
+    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[6]),
 
     //output flags
     .request_out_flag(request_out_flag),
@@ -564,15 +623,15 @@ module PE#(
     .seq_counter(seq_counter_111),
     .diff_counter(diff_counter_111),
     .receive_time_counter(receive_time_counter_111),
-    .data_miss_flag(data_miss_counter[6]),
-    .long_time_flag(long_time_counter[6]),
+    .data_miss_flag(data_miss_counter[7]),
+    .long_time_flag(long_time_counter[7]),
     .so_retrsreq_send_num(so_retrsreq_send_num_111),
-    .so_retrsreq_send_flag(so_retrsreq_send_flag[6]),
+    .so_retrsreq_send_flag(so_retrsreq_send_flag[7]),
 
     //send miss
     .retrans_counter(retrans_counter_111),
     .so_retrsreq_receive_num(so_retrsreq_receive_num_111),
-    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[6]),
+    .so_retrsreq_receive_flag(so_retrsreq_receive_flag[7]),
 
     //output flags
     .request_out_flag(request_out_flag),
@@ -638,7 +697,7 @@ module PE#(
         if(!enable)
             sum = `ID_SIZE'd0;
         else
-            sum = all_receive_flag_001 + all_receive_flag_010 + all_receive_flag_011 + all_receive_flag_100 + all_receive_flag_101 + all_receive_flag_110 + all_receive_flag_111;
+            sum = all_receive_flag_000 + all_receive_flag_001 + all_receive_flag_010 + all_receive_flag_011 + all_receive_flag_100 + all_receive_flag_101 + all_receive_flag_110 + all_receive_flag_111;
     end
 
     always @(posedge clk, negedge rst_n) begin
@@ -666,9 +725,11 @@ module PE#(
     always @(posedge clk, negedge rst_n) begin
         if(!rst_n)
             latency_max <= LATENCY_MIN;
+        //else if(!enable || !valid_r2p || data_r2p[`DST_MAX:`DST_MIN] != MY_ID)
         else if(!enable || !valid_r2p || data_r2p[`DST_MAX:`DST_MIN] != MY_ID)
             latency_max <= latency_max;
-        else if((data_r2p[`TYPE_MAX:`TYPE_MIN] == NORMAL_BAG) && (data_r2p[`SRC_MAX:`SRC_MIN] != MY_ID))
+        //else if((data_r2p[`TYPE_MAX:`TYPE_MIN] == NORMAL_BAG) && (data_r2p[`SRC_MAX:`SRC_MIN] != MY_ID))
+        else if(data_r2p[`TYPE_MAX:`TYPE_MIN] == NORMAL_BAG)
             latency_max <= (latency_max > latency_diff) ? latency_max : latency_diff;
         else
             latency_max <= latency_max;
@@ -679,7 +740,8 @@ module PE#(
             latency_min <= LATENCY_MAX;
         else if(!enable || !valid_r2p || data_r2p[`DST_MAX:`DST_MIN] != MY_ID)
             latency_min <= latency_min;
-        else if((data_r2p[`TYPE_MAX:`TYPE_MIN] == NORMAL_BAG) && (data_r2p[`SRC_MAX:`SRC_MIN] != MY_ID))
+        //else if((data_r2p[`TYPE_MAX:`TYPE_MIN] == NORMAL_BAG) && (data_r2p[`SRC_MAX:`SRC_MIN] != MY_ID))
+        else if(data_r2p[`TYPE_MAX:`TYPE_MIN] == NORMAL_BAG)
             latency_min <= (latency_min < latency_diff) ? latency_min : latency_diff;
         else
             latency_min <= latency_min;
@@ -690,7 +752,8 @@ module PE#(
             latency_sum <= LATENCY_SUM;
         else if(!enable || !valid_r2p || data_r2p[`DST_MAX:`DST_MIN] != MY_ID)
             latency_sum <= latency_sum;
-        else if((data_r2p[`TYPE_MAX:`TYPE_MIN] == NORMAL_BAG) && (data_r2p[`SRC_MAX:`SRC_MIN] != MY_ID) && (data_r2p[`TIME_MAX:`SRC_MIN] != data_in_des_buf))
+        //else if((data_r2p[`TYPE_MAX:`TYPE_MIN] == NORMAL_BAG) && (data_r2p[`SRC_MAX:`SRC_MIN] != MY_ID) && (data_r2p[`TIME_MAX:`SRC_MIN] != data_in_des_buf))
+        else if((data_r2p[`TYPE_MAX:`TYPE_MIN] == NORMAL_BAG) && (data_r2p[`TIME_MAX:`SRC_MIN] != data_in_des_buf))
             latency_sum <= latency_sum + latency_diff;
         else
             latency_sum <= latency_sum;
@@ -701,14 +764,14 @@ module PE#(
         if(!enable)
             data_miss_sum = data_miss_sum;
         else
-            data_miss_sum = data_miss_counter[0] + data_miss_counter[1] + data_miss_counter[2] + data_miss_counter[3] + data_miss_counter[4] + data_miss_counter[5] + data_miss_counter[6];
+            data_miss_sum = data_miss_counter[0] + data_miss_counter[1] + data_miss_counter[2] + data_miss_counter[3] + data_miss_counter[4] + data_miss_counter[5] + data_miss_counter[6] + data_miss_counter[7];
     end
 
     always @(*) begin
         if(!enable)
             long_time_sum = long_time_sum;
         else
-            long_time_sum = long_time_counter[0] + long_time_counter[1] + long_time_counter[2] + long_time_counter[3] + long_time_counter[4] + long_time_counter[5] + long_time_counter[6];
+            long_time_sum = long_time_counter[0] + long_time_counter[1] + long_time_counter[2] + long_time_counter[3] + long_time_counter[4] + long_time_counter[5] + long_time_counter[6] + long_time_counter[7];
     end
 
     always @(posedge clk, negedge rst_n) begin
@@ -722,6 +785,7 @@ module PE#(
             data_miss <= 1'b1;
         else begin
             case ({normal_in_flag, data_r2p[`SRC_MAX:`SRC_MIN]})
+                {1'b1, MY_ID }: data_miss <= (data_r2p[`DATA_MAX:`DATA_MIN] > (seq_counter_000 + 1'b1)) ? 1'b1 : 1'b0;
                 {1'b1, ONE_ID}: data_miss <= (data_r2p[`DATA_MAX:`DATA_MIN] > (seq_counter_001 + 1'b1)) ? 1'b1 : 1'b0;
                 {1'b1, TWO_ID}: data_miss <= (data_r2p[`DATA_MAX:`DATA_MIN] > (seq_counter_010 + 1'b1)) ? 1'b1 : 1'b0;
                 {1'b1, THR_ID}: data_miss <= (data_r2p[`DATA_MAX:`DATA_MIN] > (seq_counter_011 + 1'b1)) ? 1'b1 : 1'b0;
@@ -745,7 +809,7 @@ module PE#(
             long_time <= 1'b1;
         else if((receive_time_counter_001 == {`TIME_SIZE{1'b1}}) || (receive_time_counter_010 == {`TIME_SIZE{1'b1}}) || (receive_time_counter_011 == {`TIME_SIZE{1'b1}}) || 
                 (receive_time_counter_100 == {`TIME_SIZE{1'b1}}) || (receive_time_counter_101 == {`TIME_SIZE{1'b1}}) || (receive_time_counter_110 == {`TIME_SIZE{1'b1}}) || 
-                (receive_time_counter_111 == {`TIME_SIZE{1'b1}}))
+                (receive_time_counter_111 == {`TIME_SIZE{1'b1}}) || (receive_time_counter_000 == {`TIME_SIZE{1'b1}}) )
             long_time <= 1'b1;
         else
             long_time <= 1'b0;
@@ -757,7 +821,7 @@ module PE#(
         else if(so_retrsreq_send_num_001 || so_retrsreq_send_num_010 ||
                 so_retrsreq_send_num_011 || so_retrsreq_send_num_100 ||
                 so_retrsreq_send_num_101 || so_retrsreq_send_num_110 ||
-                so_retrsreq_send_num_111 )
+                so_retrsreq_send_num_111 || so_retrsreq_send_num_000 )
             so_retrsreq_send_num <= so_retrsreq_send_num + 1'b1;
         else
             so_retrsreq_send_num <= so_retrsreq_send_num;
@@ -770,7 +834,7 @@ module PE#(
         else if((retrans_counter_001 != {`DATA_SIZE{1'b0}}) || (retrans_counter_010 != {`DATA_SIZE{1'b0}}) || 
                 (retrans_counter_011 != {`DATA_SIZE{1'b0}}) || (retrans_counter_100 != {`DATA_SIZE{1'b0}}) || 
                 (retrans_counter_101 != {`DATA_SIZE{1'b0}}) || (retrans_counter_110 != {`DATA_SIZE{1'b0}}) || 
-                (retrans_counter_111 != {`DATA_SIZE{1'b0}}))
+                (retrans_counter_111 != {`DATA_SIZE{1'b0}}) || (retrans_counter_000 != {`DATA_SIZE{1'b0}}) )
             retrans_flag = 1'b1;
         else
             retrans_flag = 1'b0;
@@ -782,7 +846,7 @@ module PE#(
         else if(so_retrsreq_receive_num_001 || so_retrsreq_receive_num_010 ||
                 so_retrsreq_receive_num_011 || so_retrsreq_receive_num_100 ||
                 so_retrsreq_receive_num_101 || so_retrsreq_receive_num_110 ||
-                so_retrsreq_receive_num_111 )
+                so_retrsreq_receive_num_111 || so_retrsreq_receive_num_000 )
             so_retrsreq_receive_num <= so_retrsreq_receive_num + 1'b1;
         else
             so_retrsreq_receive_num <= so_retrsreq_receive_num;
@@ -874,9 +938,11 @@ module PE#(
     always @(posedge clk, negedge rst_n) begin
         if(!rst_n)
             send_num_counter <= 3'b000;
-        else if(dbg_mode && (normal_counter == {{(`DATA_SIZE - `DATA_WIDTH_DBG){1'b0}}, {`DATA_WIDTH_DBG{1'b1}}}) && normal_out_flag && (normal_dst != MY_ID) && !hold_out_flag)
+        //else if(dbg_mode && (normal_counter == {{(`DATA_SIZE - `DATA_WIDTH_DBG){1'b0}}, {`DATA_WIDTH_DBG{1'b1}}}) && normal_out_flag && (normal_dst != MY_ID) && !hold_out_flag)
+        else if(dbg_mode && (normal_counter == {{(`DATA_SIZE - `DATA_WIDTH_DBG){1'b0}}, {`DATA_WIDTH_DBG{1'b1}}}) && normal_out_flag && !hold_out_flag)
             send_num_counter <= send_num_counter + 1'b1;
-        else if(!dbg_mode && (normal_counter == {{(`DATA_SIZE - `DATA_WIDTH_NOR){1'b0}}, {(`DATA_WIDTH_NOR){1'b1}}}) && normal_out_flag && (normal_dst != MY_ID) && !hold_out_flag)
+        //else if(!dbg_mode && (normal_counter == {{(`DATA_SIZE - `DATA_WIDTH_NOR){1'b0}}, {(`DATA_WIDTH_NOR){1'b1}}}) && normal_out_flag && (normal_dst != MY_ID) && !hold_out_flag)
+        else if(!dbg_mode && (normal_counter == {{(`DATA_SIZE - `DATA_WIDTH_NOR){1'b0}}, {(`DATA_WIDTH_NOR){1'b1}}}) && normal_out_flag  && !hold_out_flag)
             send_num_counter <= send_num_counter + 1'b1;
         else
             send_num_counter <= send_num_counter;
@@ -886,9 +952,11 @@ module PE#(
             task_send_finish_flag <= 1'b0;
         else if(send_num == 3'b000)
             task_send_finish_flag <= 1'b1;
-        else if((send_num_counter + 1'b1 == send_num) && dbg_mode && (normal_counter == {{(`DATA_SIZE - `DATA_WIDTH_DBG){1'b0}}, {`DATA_WIDTH_DBG{1'b1}}}) && normal_out_flag && !hold_out_flag && (normal_dst != MY_ID))
+        //else if((send_num_counter + 1'b1 == send_num) && dbg_mode && (normal_counter == {{(`DATA_SIZE - `DATA_WIDTH_DBG){1'b0}}, {`DATA_WIDTH_DBG{1'b1}}}) && normal_out_flag && !hold_out_flag && (normal_dst != MY_ID))
+        else if((send_num_counter + 1'b1 == send_num) && dbg_mode && (normal_counter == {{(`DATA_SIZE - `DATA_WIDTH_DBG){1'b0}}, {`DATA_WIDTH_DBG{1'b1}}}) && normal_out_flag && !hold_out_flag )
             task_send_finish_flag <= 1'b1;
-        else if((send_num_counter + 1'b1 == send_num) && !dbg_mode && (normal_counter == {{(`DATA_SIZE - `DATA_WIDTH_NOR){1'b0}}, {(`DATA_WIDTH_NOR){1'b1}}}) && normal_out_flag && !hold_out_flag && (normal_dst != MY_ID))
+        //else if((send_num_counter + 1'b1 == send_num) && !dbg_mode && (normal_counter == {{(`DATA_SIZE - `DATA_WIDTH_NOR){1'b0}}, {(`DATA_WIDTH_NOR){1'b1}}}) && normal_out_flag && !hold_out_flag && (normal_dst != MY_ID))
+        else if((send_num_counter + 1'b1 == send_num) && !dbg_mode && (normal_counter == {{(`DATA_SIZE - `DATA_WIDTH_NOR){1'b0}}, {(`DATA_WIDTH_NOR){1'b1}}}) && normal_out_flag && !hold_out_flag )
             task_send_finish_flag <= 1'b1;
         else
             task_send_finish_flag <= task_send_finish_flag;
@@ -917,6 +985,8 @@ module PE#(
             request_dst <= MY_ID;
         else if((!valid_enable || full) && long_time)
             request_dst <= request_dst;
+        else if((receive_time_counter_000 == {`TIME_SIZE{1'b1}}) || (normal_in_flag && (data_r2p[`SRC_MAX:`SRC_MIN] == MY_ID) && (data_r2p[`DATA_MAX:`DATA_MIN] > (seq_counter_000 + 1'b1))))
+            request_dst <= MY_ID;
         else if((receive_time_counter_001 == {`TIME_SIZE{1'b1}}) || (normal_in_flag && (data_r2p[`SRC_MAX:`SRC_MIN] == ONE_ID) && (data_r2p[`DATA_MAX:`DATA_MIN] > (seq_counter_001 + 1'b1))))
             request_dst <= ONE_ID;
         else if((receive_time_counter_010 == {`TIME_SIZE{1'b1}}) || (normal_in_flag && (data_r2p[`SRC_MAX:`SRC_MIN] == TWO_ID) && (data_r2p[`DATA_MAX:`DATA_MIN] > (seq_counter_010 + 1'b1))))
@@ -931,19 +1001,21 @@ module PE#(
             request_dst <= SIX_ID;
         else if((receive_time_counter_111 == {`TIME_SIZE{1'b1}}) || (normal_in_flag && (data_r2p[`SRC_MAX:`SRC_MIN] == SEV_ID) && (data_r2p[`DATA_MAX:`DATA_MIN] > (seq_counter_111 + 1'b1))))
             request_dst <= SEV_ID;
-        else if((long_time_counter[0] || (diff_counter_001 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != ONE_ID))
+        else if((long_time_counter[0] || (diff_counter_000 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != MY_ID))
+            request_dst <= MY_ID;
+        else if((long_time_counter[1] || (diff_counter_001 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != ONE_ID))
             request_dst <= ONE_ID;
-        else if((long_time_counter[1] || (diff_counter_010 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != TWO_ID))
+        else if((long_time_counter[2] || (diff_counter_010 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != TWO_ID))
             request_dst <= TWO_ID;
-        else if((long_time_counter[2] || (diff_counter_011 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != THR_ID))
+        else if((long_time_counter[3] || (diff_counter_011 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != THR_ID))
             request_dst <= THR_ID;
-        else if((long_time_counter[3] || (diff_counter_100 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != FOU_ID))
+        else if((long_time_counter[4] || (diff_counter_100 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != FOU_ID))
             request_dst <= FOU_ID;
-        else if((long_time_counter[4] || (diff_counter_101 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != FIV_ID))
+        else if((long_time_counter[5] || (diff_counter_101 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != FIV_ID))
             request_dst <= FIV_ID;
-        else if((long_time_counter[5] || (diff_counter_110 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != SIX_ID))
+        else if((long_time_counter[6] || (diff_counter_110 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != SIX_ID))
             request_dst <= SIX_ID;
-        else if((long_time_counter[6] || (diff_counter_111 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != SEV_ID))
+        else if((long_time_counter[7] || (diff_counter_111 != {`DATA_SIZE{1'b0}})) && (!request_out_flag || hold_out_flag || request_dst != SEV_ID))
             request_dst <= SEV_ID;
         else
             request_dst <= MY_ID;
@@ -951,6 +1023,8 @@ module PE#(
 
     always @(posedge clk, negedge rst_n) begin
         if(!rst_n)
+            retrans_dst <= MY_ID;
+        else if(request_in_flag && (data_r2p[`SRC_MAX:`SRC_MIN] == MY_ID) && (data_r2p[`TIME_MAX:`SRC_MIN] != data_in_des_buf))
             retrans_dst <= MY_ID;
         else if(request_in_flag && (data_r2p[`SRC_MAX:`SRC_MIN] == ONE_ID) && (data_r2p[`TIME_MAX:`SRC_MIN] != data_in_des_buf))
             retrans_dst <= ONE_ID;
@@ -966,6 +1040,8 @@ module PE#(
             retrans_dst <= SIX_ID;
         else if(request_in_flag && (data_r2p[`SRC_MAX:`SRC_MIN] == SEV_ID) && (data_r2p[`TIME_MAX:`SRC_MIN] != data_in_des_buf))
             retrans_dst <= SEV_ID;
+        else if((retrans_counter_000 != {`DATA_SIZE{1'b0}}) && ((retrans_counter_000 != `DATA_SIZE'd1) || !retrans_out_flag || hold_out_flag || retrans_dst != MY_ID))
+            retrans_dst <= MY_ID;
         else if((retrans_counter_001 != {`DATA_SIZE{1'b0}}) && ((retrans_counter_001 != `DATA_SIZE'd1) || !retrans_out_flag || hold_out_flag || retrans_dst != ONE_ID))
             retrans_dst <= ONE_ID;
         else if((retrans_counter_010 != {`DATA_SIZE{1'b0}}) && ((retrans_counter_010 != `DATA_SIZE'd1) || !retrans_out_flag || hold_out_flag || retrans_dst != TWO_ID))
@@ -1044,6 +1120,7 @@ module PE#(
             data_p2r <= {data_p2r[`DATA_MAX:`DATA_MIN], time_stamp, data_p2r[`TYPE_MAX:`DST_MIN]};
         else if((data_miss || long_time) && !task_receive_finish_flag) begin
             case (request_dst)
+                MY_ID:  data_p2r <= {diff_counter_000, time_stamp, RETRY_REQ, MY_ID, MY_ID};
                 ONE_ID: data_p2r <= {diff_counter_001, time_stamp, RETRY_REQ, MY_ID, ONE_ID};
                 TWO_ID: data_p2r <= {diff_counter_010, time_stamp, RETRY_REQ, MY_ID, TWO_ID};
                 THR_ID: data_p2r <= {diff_counter_011, time_stamp, RETRY_REQ, MY_ID, THR_ID};
@@ -1077,7 +1154,8 @@ module PE#(
             valid_p2r <= 1'b0;
         else if((data_miss || long_time) && !task_receive_finish_flag)
             valid_p2r <= 1'b1;
-        else if((!task_send_finish_flag && (normal_dst != MY_ID)) || retrans_flag)
+        //else if((!task_send_finish_flag && (normal_dst != MY_ID)) || retrans_flag)
+        else if(!task_send_finish_flag  || retrans_flag)
             valid_p2r <= 1'b1;
         else
             valid_p2r <= 1'b0;

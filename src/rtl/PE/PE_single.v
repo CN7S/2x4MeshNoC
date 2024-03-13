@@ -1,5 +1,6 @@
 //Copyright [2024/2/16] [author: SJTUME208 / owner: DIC course 2024]
-//written by Xie Lin 
+//written by Lin Xie 
+//modified by Kun Su 2024/3/13
 
 `define DATA_SIZE 16
 `define DATA_SIZE_0 15
@@ -10,7 +11,7 @@
 `define ID_SIZE 3
 `define ID_SIZE_0 2
 `define ROUTER_NUM 8
-`define ROUTER_NUM_0 6
+`define ROUTER_NUM_0 7  //sukun
 `define LOG_ROUTER_NUM 3
 `define LOG_ROUTER_NUM_0 2
 `define ROUTER_WIDTH_0 23

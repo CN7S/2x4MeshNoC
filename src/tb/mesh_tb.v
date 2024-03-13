@@ -95,7 +95,7 @@ initial begin
 	// pe_rate_wire = 0;
 	// pe_mode_wire = {8{4'b0001}};
 	// pe_dst_seq_wire = {8{24'h0}};
-	// pe_flush_wire = {8{1'b1}};
+	// pe_flush_wire = 0;
 
 	// //turn
 	// pe_enable = 0;
