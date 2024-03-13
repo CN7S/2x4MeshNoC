@@ -1,3 +1,36 @@
+// +FHDR-----------------------------------------------------------------------
+// Copyright.
+ // ----------------------------------------------------------------------------
+// FILE NAME      : sync_fifo_8x32.v
+ // DEPARTMENT     : 
+ // AUTHOR         : Yuxin Chen
+ // AUTHOR’S EMAIL : cyx1324841682@sjtu.edu.cn
+ // ----------------------------------------------------------------------------
+// RELEASE HISTORY
+ // VERSION DATE        AUTHOR  DESCRIPTION
+ // 1.0  2024/03/13    Yuxin Chen 	    
+// ----------------------------------------------------------------------------
+// KEYWORDS    : FIFO
+ // ----------------------------------------------------------------------------
+// PURPOSE     : SYNC FIFO with 8x32 buffer. 
+ // ----------------------------------------------------------------------------
+// PARAMETERS
+ //     PARAM NAME      RANGE    : DESCRIPTION         : DEFAULT : UNITS
+ //		NONE
+ // ----------------------------------------------------------------------------
+// REUSE ISSUES
+ //   Reset Strategy      :
+//   Clock Domains        :
+//   Critical Timing      :
+//   Test Features        :
+//   Asynchronous I/F     :
+//   Scan Methodology     :
+//   Instantiations       :
+//   Synthesizable (y/n)  :
+//   Other      		  :
+ // -FHDR-----------------------------------------------------------------------
+
+
 `include "global.v"
 module sync_fifo_8x32
 (

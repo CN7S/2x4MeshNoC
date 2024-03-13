@@ -1,23 +1,29 @@
 // +FHDR-----------------------------------------------------------------------
-// Copyright (c) 2004 Freescale Semiconductor, Inc. All rights reserved
- // Freescale Confidential Proprietary
+// Copyright.
  // ----------------------------------------------------------------------------
-// FILE NAME      :
- // DEPARTMENT     :
- // AUTHOR         :
- // AUTHOR’S EMAIL :
+// FILE NAME      : mesh.sv
+ // DEPARTMENT     : 
+ // AUTHOR         : Yuxin Chen
+ // AUTHOR’S EMAIL : cyx1324841682@sjtu.edu.cn
  // ----------------------------------------------------------------------------
 // RELEASE HISTORY
  // VERSION DATE        AUTHOR  DESCRIPTION
- // 1.0  YYYY-MM-DD  name       
+ // 1.0  2024/03/13    Yuxin Chen 	    
 // ----------------------------------------------------------------------------
-// KEYWORDS    : General file searching keywords, leave blank if none.
+// KEYWORDS    : mesh
  // ----------------------------------------------------------------------------
-// PURPOSE     : Short description of functionality
+// PURPOSE     : Construct 2x4 Mesh NOC. 
  // ----------------------------------------------------------------------------
 // PARAMETERS
- //     PARAM NAME      RANGE    : DESCRIPTION       : DEFAULT : UNITS
- // e.g.DATA_WIDTH     [32,16]   : width of the data : 32  :
+ //     PARAM NAME      RANGE    : DESCRIPTION         : DEFAULT : UNITS
+ // ROUTER_ADDRESS_PAR 	[]       : Router Address      :         :
+ // MY_ID_PAR			[]		 : PE Configure : 		 : 
+ // ONE_ID_PAR			[]		 : PE Configure : 		 : 
+ // TWO_ID_PAR			[]		 : PE Configure : 		 : 
+ // THR_ID_PAR			[]		 : PE Configure : 		 : 
+ // FOU_ID_PAR			[]		 : PE Configure : 		 : 
+ // FIV_ID_PAR			[]		 : PE Configure : 		 : 
+ // SEV_ID_PAR			[]		 : PE Configure : 		 : 
  // ----------------------------------------------------------------------------
 // REUSE ISSUES
  //   Reset Strategy      :

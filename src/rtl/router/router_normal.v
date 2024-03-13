@@ -1,6 +1,38 @@
+// +FHDR-----------------------------------------------------------------------
+// Copyright.
+ // ----------------------------------------------------------------------------
+// FILE NAME      : router_normal.v
+ // DEPARTMENT     : 
+ // AUTHOR         : Yuxin Chen
+ // AUTHOR’S EMAIL : cyx1324841682@sjtu.edu.cn
+ // ----------------------------------------------------------------------------
+// RELEASE HISTORY
+ // VERSION DATE        AUTHOR  DESCRIPTION
+ // 1.0  2024/03/13    Yuxin Chen 	    
+// ----------------------------------------------------------------------------
+// KEYWORDS    : ROUTER
+ // ----------------------------------------------------------------------------
+// PURPOSE     : 4 PORT ROUTER(X1,X2,Y,LOCAL), for 2x4mesh normol ROUTER.
+ // ----------------------------------------------------------------------------
+// PARAMETERS
+ //     PARAM NAME      RANGE    : DESCRIPTION         : DEFAULT : UNITS
+ //		ROUTER_ADDRESS  [1,2,5,6]: LOCAL Router ADDRESS: 3'b1    :
+ // ----------------------------------------------------------------------------
+// REUSE ISSUES
+ //   Reset Strategy      :
+//   Clock Domains        :
+//   Critical Timing      :
+//   Test Features        :
+//   Asynchronous I/F     :
+//   Scan Methodology     :
+//   Instantiations       :
+//   Synthesizable (y/n)  :
+//   Other      		  :
+ // -FHDR-----------------------------------------------------------------------
+
 `include "global.v"
 module router_normal#(
-	parameter ROUTER_ADDRESS = 3'b0
+	parameter ROUTER_ADDRESS = 3'b1
 )(
 	input				clk		,
 	input 				rst_n	,

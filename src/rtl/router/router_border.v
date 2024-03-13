@@ -1,3 +1,36 @@
+// +FHDR-----------------------------------------------------------------------
+// Copyright.
+ // ----------------------------------------------------------------------------
+// FILE NAME      : router_border.v
+ // DEPARTMENT     : 
+ // AUTHOR         : Yuxin Chen
+ // AUTHOR’S EMAIL : cyx1324841682@sjtu.edu.cn
+ // ----------------------------------------------------------------------------
+// RELEASE HISTORY
+ // VERSION DATE        AUTHOR  DESCRIPTION
+ // 1.0  2024/03/13    Yuxin Chen 	    
+// ----------------------------------------------------------------------------
+// KEYWORDS    : ROUTER
+ // ----------------------------------------------------------------------------
+// PURPOSE     : 3 PORT ROUTER(X,Y,LOCAL), for 2x4mesh border ROUTER.
+ // ----------------------------------------------------------------------------
+// PARAMETERS
+ //     PARAM NAME      RANGE    : DESCRIPTION         : DEFAULT : UNITS
+ //		ROUTER_ADDRESS  [0,3,4,7]: LOCAL Router ADDRESS: 3'b0    :
+ // ----------------------------------------------------------------------------
+// REUSE ISSUES
+ //   Reset Strategy      :
+//   Clock Domains        :
+//   Critical Timing      :
+//   Test Features        :
+//   Asynchronous I/F     :
+//   Scan Methodology     :
+//   Instantiations       :
+//   Synthesizable (y/n)  :
+//   Other      		  :
+ // -FHDR-----------------------------------------------------------------------
+
+
 `include "global.v"
 module router_border#(
 	parameter ROUTER_ADDRESS = 3'b0
