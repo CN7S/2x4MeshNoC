@@ -113,8 +113,8 @@ sync_fifo_8x32 unit_fifo_x(
 	.rst_n(rst_n),
 	.wr_en(X_DATA_VALID_IN),
 	.wr_data(X_DATA_IN),
-	.almost_full(X_FULL_OUT),
-	.full(fifo_full_x),
+	.almost_full(fifo_almost_full_x),
+	.full(X_FULL_OUT),
 	
 	.rd_en(fifo_rd_en_x),
 	.rd_data(fifo_rd_data_x),
@@ -128,8 +128,8 @@ sync_fifo_8x32 unit_fifo_y(
 	.rst_n(rst_n),
 	.wr_en(Y_DATA_VALID_IN),
 	.wr_data(Y_DATA_IN),
-	.almost_full(Y_FULL_OUT),
-	.full(fifo_full_y),
+	.almost_full(fifo_almost_full_y),
+	.full(Y_FULL_OUT),
 	
 	.rd_en(fifo_rd_en_y),
 	.rd_data(fifo_rd_data_y),
@@ -380,7 +380,8 @@ always@(posedge clk or negedge rst_n) begin
 		X_DATA_OUT <= 0;
 	end
 	else begin
-		if(port_sw_x != `SW_STOP) begin
+		if(X_FULL_IN) X_DATA_OUT <= X_DATA_OUT;
+		else if(port_sw_x != `SW_STOP) begin
 			if(port_sw_x == `SW_X1) X_DATA_OUT <= buffer_x[2];
 			else if(port_sw_x == `SW_Y1) X_DATA_OUT <= buffer_y[2];
 			else if(port_sw_x == `SW_LOCAL) X_DATA_OUT <= buffer_local[2];
@@ -394,7 +395,8 @@ always@(posedge clk or negedge rst_n) begin
 		X_DATA_VALID_OUT <= 0;
 	end
 	else begin
-		if(!X_FULL_IN && port_sw_x != `SW_STOP) begin
+		if(X_FULL_IN) X_DATA_VALID_OUT <= X_DATA_VALID_OUT;
+		else if(!X_FULL_IN && port_sw_x != `SW_STOP) begin
 			X_DATA_VALID_OUT <= 1;
 		end
 		else X_DATA_VALID_OUT <= 0;
@@ -407,7 +409,8 @@ always@(posedge clk or negedge rst_n) begin
 		Y_DATA_OUT <= 0;
 	end
 	else begin
-		if(port_sw_y != `SW_STOP) begin
+		if(Y_FULL_IN) Y_DATA_OUT <= Y_DATA_OUT;
+		else if(port_sw_y != `SW_STOP) begin
 			if(port_sw_y == `SW_X1) Y_DATA_OUT <= buffer_x[2];
 			else if(port_sw_y == `SW_Y1) Y_DATA_OUT <= buffer_y[2];
 			else if(port_sw_y == `SW_LOCAL) Y_DATA_OUT <= buffer_local[2];
@@ -421,7 +424,8 @@ always@(posedge clk or negedge rst_n) begin
 		Y_DATA_VALID_OUT <= 0;
 	end
 	else begin
-		if(!Y_FULL_IN && port_sw_y != `SW_STOP) begin
+		if(Y_FULL_IN) Y_DATA_VALID_OUT <= Y_DATA_VALID_OUT;
+		else if(!Y_FULL_IN && port_sw_y != `SW_STOP) begin
 			Y_DATA_VALID_OUT <= 1;
 		end
 		else Y_DATA_VALID_OUT <= 0;

@@ -140,8 +140,8 @@ sync_fifo_8x32 unit_fifo_x1(
 	.rst_n(rst_n),
 	.wr_en(X1_DATA_VALID_IN),
 	.wr_data(X1_DATA_IN),
-	.almost_full(X1_FULL_OUT),
-	.full(fifo_full_x1),
+	.almost_full(fifo_almost_full_x1),
+	.full(X1_FULL_OUT),
 	
 	.rd_en(fifo_rd_en_x1),
 	.rd_data(fifo_rd_data_x1),
@@ -154,8 +154,8 @@ sync_fifo_8x32 unit_fifo_x2(
 	.rst_n(rst_n),
 	.wr_en(X2_DATA_VALID_IN),
 	.wr_data(X2_DATA_IN),
-	.almost_full(X2_FULL_OUT),
-	.full(fifo_full_x2),
+	.almost_full(fifo_almost_full_x2),
+	.full(X2_FULL_OUT),
 	
 	.rd_en(fifo_rd_en_x2),
 	.rd_data(fifo_rd_data_x2),
@@ -169,8 +169,8 @@ sync_fifo_8x32 unit_fifo_y(
 	.rst_n(rst_n),
 	.wr_en(Y_DATA_VALID_IN),
 	.wr_data(Y_DATA_IN),
-	.almost_full(Y_FULL_OUT),
-	.full(fifo_full_y),
+	.almost_full(fifo_almost_full_y),
+	.full(Y_FULL_OUT),
 	
 	.rd_en(fifo_rd_en_y),
 	.rd_data(fifo_rd_data_y),
@@ -501,7 +501,8 @@ always@(posedge clk or negedge rst_n) begin
 		X1_DATA_OUT <= 0;
 	end
 	else begin
-		if(port_sw_x1 != `SW_STOP) begin
+		if(X1_FULL_IN) X1_DATA_OUT <= X1_DATA_OUT;
+		else if(port_sw_x1 != `SW_STOP) begin
 			if(port_sw_x1 == `SW_X1) X1_DATA_OUT <= buffer_x1[2];
 			else if(port_sw_x1 == `SW_X2) X1_DATA_OUT <= buffer_x2[2];
 			else if(port_sw_x1 == `SW_Y1) X1_DATA_OUT <= buffer_y[2];
@@ -516,7 +517,8 @@ always@(posedge clk or negedge rst_n) begin
 		X1_DATA_VALID_OUT <= 0;
 	end
 	else begin
-		if(!X1_FULL_IN && port_sw_x1 != `SW_STOP) begin
+		if(X1_FULL_IN) X1_DATA_VALID_OUT <= X1_DATA_VALID_OUT;
+		else if(!X1_FULL_IN && port_sw_x1 != `SW_STOP) begin
 			X1_DATA_VALID_OUT <= 1;
 		end
 		else X1_DATA_VALID_OUT <= 0;
@@ -529,7 +531,8 @@ always@(posedge clk or negedge rst_n) begin
 		X2_DATA_OUT <= 0;
 	end
 	else begin
-		if(port_sw_x2 != `SW_STOP) begin
+		if(X2_FULL_IN) X2_DATA_OUT <= X2_DATA_OUT;
+		else if(port_sw_x2 != `SW_STOP) begin
 			if(port_sw_x2 == `SW_X1) X2_DATA_OUT <= buffer_x1[2];
 			else if(port_sw_x2 == `SW_X2) X2_DATA_OUT <= buffer_x2[2];
 			else if(port_sw_x2 == `SW_Y1) X2_DATA_OUT <= buffer_y[2];
@@ -544,7 +547,8 @@ always@(posedge clk or negedge rst_n) begin
 		X2_DATA_VALID_OUT <= 0;
 	end
 	else begin
-		if(!X2_FULL_IN && port_sw_x2 != `SW_STOP) begin
+		if(X2_FULL_IN) X2_DATA_VALID_OUT <= X2_DATA_VALID_OUT;
+		else if(!X2_FULL_IN && port_sw_x2 != `SW_STOP) begin
 			X2_DATA_VALID_OUT <= 1;
 		end
 		else X2_DATA_VALID_OUT <= 0;
@@ -557,7 +561,8 @@ always@(posedge clk or negedge rst_n) begin
 		Y_DATA_OUT <= 0;
 	end
 	else begin
-		if(port_sw_y != `SW_STOP) begin
+		if(Y_FULL_IN) Y_DATA_OUT <= Y_DATA_OUT;
+		else if(port_sw_y != `SW_STOP) begin
 			if(port_sw_y == `SW_X1) Y_DATA_OUT <= buffer_x1[2];
 			else if(port_sw_y == `SW_X2) Y_DATA_OUT <= buffer_x2[2];
 			else if(port_sw_y == `SW_Y1) Y_DATA_OUT <= buffer_y[2];
@@ -572,7 +577,8 @@ always@(posedge clk or negedge rst_n) begin
 		Y_DATA_VALID_OUT <= 0;
 	end
 	else begin
-		if(!Y_FULL_IN && port_sw_y != `SW_STOP) begin
+		if(Y_FULL_IN) Y_DATA_VALID_OUT <= Y_DATA_VALID_OUT;
+		else if(!Y_FULL_IN && port_sw_y != `SW_STOP) begin
 			Y_DATA_VALID_OUT <= 1;
 		end
 		else Y_DATA_VALID_OUT <= 0;

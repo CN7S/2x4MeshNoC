@@ -27,15 +27,15 @@ initial begin
 	
 	// configure
 	
-	// // bit complement
-	// pe_enable = 0;
-	// pe_dbg_mode_wire = {8{1'b1}};
-	// pe_send_num_wire = {8{3'b001}};
-	// pe_receive_num_wire = {8{3'b001}};
-	// pe_rate_wire = 0;
-	// pe_mode_wire = {8{4'b0001}};
-	// pe_dst_seq_wire = {24'h0, 24'h1, 24'h2, 24'h3, 24'h4, 24'h5, 24'h6, 24'h7};
-	// pe_flush_wire = {8{1'b1}};
+	// bit complement
+	pe_enable = 0;
+	pe_dbg_mode_wire = {8{1'b1}};
+	pe_send_num_wire = {8{3'b001}};
+	pe_receive_num_wire = {8{3'b001}};
+	pe_rate_wire = 0;
+	pe_mode_wire = {8{4'b0001}};
+	pe_dst_seq_wire = {24'h0, 24'h1, 24'h2, 24'h3, 24'h4, 24'h5, 24'h6, 24'h7};
+	pe_flush_wire = {8{1'b1}};
 
 	// // bit reverse
 	// pe_enable = 0;
