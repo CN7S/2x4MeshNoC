@@ -71,12 +71,12 @@ assign ren = rd_en & (!empty);
 // fifo read address generated
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) 
-		raddr <= {(`ADDR_WIDTH+1){1'b0}};
+		raddr <= {(`ADDR_WIDTH+1){1'b0}}; // reset read address
 	else if(ren)
-		raddr <= raddr + 1'b1;
+		raddr <= raddr + 1'b1; // read address count + 1
 end
 
-assign rd_addr = raddr[`ADDR_WIDTH-1:0];
+assign rd_addr = raddr[`ADDR_WIDTH-1:0]; // get ram read address
 
 // read gap generated
 

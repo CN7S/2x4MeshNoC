@@ -1,3 +1,37 @@
+// +FHDR-----------------------------------------------------------------------
+// Copyright (c) 2004 Freescale Semiconductor, Inc. All rights reserved
+ // Freescale Confidential Proprietary
+ // ----------------------------------------------------------------------------
+// FILE NAME      :
+ // DEPARTMENT     :
+ // AUTHOR         :
+ // AUTHOR’S EMAIL :
+ // ----------------------------------------------------------------------------
+// RELEASE HISTORY
+ // VERSION DATE        AUTHOR  DESCRIPTION
+ // 1.0  YYYY-MM-DD  name       
+// ----------------------------------------------------------------------------
+// KEYWORDS    : General file searching keywords, leave blank if none.
+ // ----------------------------------------------------------------------------
+// PURPOSE     : Short description of functionality
+ // ----------------------------------------------------------------------------
+// PARAMETERS
+ //     PARAM NAME      RANGE    : DESCRIPTION       : DEFAULT : UNITS
+ // e.g.DATA_WIDTH     [32,16]   : width of the data : 32  :
+ // ----------------------------------------------------------------------------
+// REUSE ISSUES
+ //   Reset Strategy      :
+//   Clock Domains        :
+//   Critical Timing      :
+//   Test Features        :
+//   Asynchronous I/F     :
+//   Scan Methodology     :
+//   Instantiations       :
+//   Synthesizable (y/n)  :
+//   Other      		  :
+ // -FHDR-----------------------------------------------------------------------
+
+
 `include "global.v"
 module mesh(
 	input clk,
@@ -298,7 +332,7 @@ generate
 			.rst_n(rst_n),
 			.clk(clk)
 		);
-	end
+	end // pecore
 endgenerate
 
 
