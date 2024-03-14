@@ -88,9 +88,9 @@ begin
 	if (valid_x2)
 	begin
 		if      (out_x1_sw == `SW_X2 && !full_x1)       en_x2 = 1;
-    		else if (out_x2_sw == `SW_X2 && !full_x2)       en_x2 = 1;
-   		else if (out_y_sw == `SW_X2 && !full_y)         en_x2 = 1;
-    		else if (out_local_sw == `SW_X2 && !full_local) en_x2 = 1;
+    else if (out_x2_sw == `SW_X2 && !full_x2)       en_x2 = 1;
+    else if (out_y_sw == `SW_X2 && !full_y)         en_x2 = 1;
+    else if (out_local_sw == `SW_X2 && !full_local) en_x2 = 1;
 		else	en_x2 = 0;
 	end
 	else 	en_x2 = 1;
