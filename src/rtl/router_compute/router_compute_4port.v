@@ -1,7 +1,7 @@
 // +FHDR-----------------------------------------------------------------------
 // Copyright.
 // ----------------------------------------------------------------------------
- // FILE NAME      : router_sta_3port.v
+ // FILE NAME      : router_sta_sport.v
  // DEPARTMENT     :
  // AUTHOR         : Yi Wan
  // AUTHOR’S EMAIL : wanyi2003@sjtu.edu.cn
@@ -10,9 +10,9 @@
  // VERSION DATE        AUTHOR  DESCRIPTION
  // 1.0  2024-03-13  Yi Wan     
 // ----------------------------------------------------------------------------
-// KEYWORDS    : 3-port static routing
+// KEYWORDS    : 4-port static routing
  // ----------------------------------------------------------------------------
-// PURPOSE     : Determine output port for a 3-port router.
+// PURPOSE     : Determine output port for a 4-port router.
  // ----------------------------------------------------------------------------
 // PARAMETERS
  //     PARAM NAME      RANGE    : DESCRIPTION       : DEFAULT : UNITS
@@ -29,9 +29,9 @@
 //   Other      		  :
  // -FHDR-----------------------------------------------------------------------
 
-`include "global.v"
+`include"global.v"
 
-module router_sta_3port
+module router_compute_4port
 (
 	input 			clk,
 	input 			rst_n,
@@ -47,17 +47,26 @@ module router_sta_3port
 always@(posedge clk or negedge rst_n) 
 begin
 	if (!rst_n) 
-		port <= `EMPTY;
+		port <= `EMPTY; 
 	else if (en)
 	begin
 		if(!valid)
-			port <= `EMPTY;
-		else if (router_add[1:0] != dst[1:0])
-			port <= `OUT_X1_PORT;
-		else if (router_add[2] != dst[2])
-			port <= `OUT_Y1_PORT;
+			port <= `EMPTY; 
 		else 
-			port <= `OUT_LOCAL_PORT;
+			if (router_add[1:0] != dst[1:0])
+			begin
+				if (router_add[1:0] < dst[1:0])
+					port <= `OUT_X2_PORT;
+				else 
+					port <= `OUT_X1_PORT;
+			end
+			else 
+			begin
+				if (router_add[2] != dst[2])
+					port <= `OUT_Y1_PORT;
+				else 
+					port <= `OUT_LOCAL_PORT;
+  			end
 	end
 end
 

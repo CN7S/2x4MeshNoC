@@ -456,7 +456,7 @@ wire [`DATA_WIDTH-1:0] local_data_tmp;
 assign local_data_tmp = buffer_local[0];
 assign local_dst = local_data_tmp[2:0];
 
-router_sta_4port router_sta_x1(
+router_compute_4port router_compute_x1(
 	.clk(clk),
 	.rst_n(rst_n),
 	.en(en_x1),
@@ -466,7 +466,7 @@ router_sta_4port router_sta_x1(
 	.port(port_x1_dst)
 );
 
-router_sta_4port router_sta_x2(
+router_compute_4port router_compute_x2(
 	.clk(clk),
 	.rst_n(rst_n),
 	.en(en_x2),
@@ -478,7 +478,7 @@ router_sta_4port router_sta_x2(
 
 
 
-router_sta_4port router_sta_y(
+router_compute_4port router_compute_y(
 	.clk(clk),
 	.rst_n(rst_n),
 	.en(en_y),
@@ -489,7 +489,7 @@ router_sta_4port router_sta_y(
 );
 
 
-router_sta_4port router_sta_local(
+router_compute_4port router_compute_local(
 	.clk(clk),
 	.rst_n(rst_n),
 	.en(en_local),

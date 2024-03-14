@@ -929,6 +929,8 @@ module PE#(
     always @(posedge clk, negedge rst_n) begin
         if(!rst_n)
             start <= 1'b0;
+		// else if(!enable)	// ????????
+			// start <= 1'b0;
         else if(valid_p2r && (data_p2r[`SRC_MAX:`SRC_MIN] == MY_ID))
             start <= 1'b1;
         else
