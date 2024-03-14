@@ -71,10 +71,10 @@ always@(*)
 begin
 	if (valid_x1)
 	begin
-    if       (out_x1_sw == `SW_X1 && !full_x1)        en_x1 = 1;
-    else if  (out_x2_sw == `SW_X1 && !full_x2)        en_x1 = 1;
-    else if  (out_y_sw == `SW_X1 && !full_y)          en_x1 = 1;
-    else if  (out_local_sw == `SW_X1 && !full_local)  en_x1 = 1;
+		if       (out_x1_sw == `SW_X1 && !full_x1)        en_x1 = 1;
+		else if  (out_x2_sw == `SW_X1 && !full_x2)        en_x1 = 1;
+		else if  (out_y_sw == `SW_X1 && !full_y)          en_x1 = 1;
+		else if  (out_local_sw == `SW_X1 && !full_local)  en_x1 = 1;
 		else	en_x1 = 0;
 	end
 	else 	en_x1 = 1;
@@ -88,9 +88,9 @@ begin
 	if (valid_x2)
 	begin
 		if      (out_x1_sw == `SW_X2 && !full_x1)       en_x2 = 1;
-    		else if (out_x2_sw == `SW_X2 && !full_x2)       en_x2 = 1;
-   		else if (out_y_sw == `SW_X2 && !full_y)         en_x2 = 1;
-    		else if (out_local_sw == `SW_X2 && !full_local) en_x2 = 1;
+		else if (out_x2_sw == `SW_X2 && !full_x2)       en_x2 = 1;
+		else if (out_y_sw == `SW_X2 && !full_y)         en_x2 = 1;
+		else if (out_local_sw == `SW_X2 && !full_local) en_x2 = 1;
 		else	en_x2 = 0;
 	end
 	else 	en_x2 = 1;
@@ -103,10 +103,10 @@ always@(*)
 begin
 	if (valid_y)
 	begin
-    if      (out_x1_sw == `SW_Y1 && !full_x1)       en_y = 1;
-    else if (out_x2_sw == `SW_Y1 && !full_x2)       en_y = 1;
-    else if (out_y_sw == `SW_Y1 && !full_y)         en_y = 1;
-    else if (out_local_sw == `SW_Y1 && !full_local) en_y = 1;
+		if      (out_x1_sw == `SW_Y1 && !full_x1)       en_y = 1;
+		else if (out_x2_sw == `SW_Y1 && !full_x2)       en_y = 1;
+		else if (out_y_sw == `SW_Y1 && !full_y)         en_y = 1;
+		else if (out_local_sw == `SW_Y1 && !full_local) en_y = 1;
 		else	en_y = 0;
 	end
 	else 	en_y = 1;
@@ -119,10 +119,10 @@ always@(*)
 begin
 	if (valid_local)
 	begin
-    if      (out_x1_sw == `SW_LOCAL && !full_x1)        en_local = 1;
-    else if (out_x2_sw == `SW_LOCAL && !full_x2)        en_local = 1;
-    else if (out_y_sw == `SW_LOCAL && !full_y)          en_local = 1;
-    else if (out_local_sw == `SW_LOCAL && !full_local)  en_local = 1;
+		if      (out_x1_sw == `SW_LOCAL && !full_x1)        en_local = 1;
+		else if (out_x2_sw == `SW_LOCAL && !full_x2)        en_local = 1;
+		else if (out_y_sw == `SW_LOCAL && !full_y)          en_local = 1;
+		else if (out_local_sw == `SW_LOCAL && !full_local)  en_local = 1;
 		else	en_local = 0;
 	end
 	else 	en_local = 1;
