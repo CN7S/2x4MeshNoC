@@ -42,75 +42,65 @@ module router_border#(
 	input [`DATA_WIDTH-1:0]		LOCAL_DATA_IN		,
 	input						LOCAL_DATA_VALID_IN	,
 	
-	output	reg [`DATA_WIDTH-1:0]	LOCAL_DATA_OUT		,
-	output	reg					LOCAL_DATA_VALID_OUT,
+	output	 [`DATA_WIDTH-1:0]	LOCAL_DATA_OUT		,
+	output						LOCAL_DATA_VALID_OUT,
 	output						LOCAL_FULL_OUT		,
 	
 	input [`DATA_WIDTH-1:0]		X_DATA_IN		,
 	input						X_DATA_VALID_IN	,
 	input						X_FULL_IN		,
 	
-	output	reg [`DATA_WIDTH-1:0]	X_DATA_OUT		,
-	output	reg					X_DATA_VALID_OUT,
+	output	 [`DATA_WIDTH-1:0]	X_DATA_OUT		,
+	output						X_DATA_VALID_OUT,
 	output						X_FULL_OUT		,
 
 	input [`DATA_WIDTH-1:0]		Y_DATA_IN		,
 	input						Y_DATA_VALID_IN	,
 	input						Y_FULL_IN		,
 	
-	output	reg [`DATA_WIDTH-1:0]	Y_DATA_OUT		,
-	output	reg					Y_DATA_VALID_OUT,
+	output	 [`DATA_WIDTH-1:0]	Y_DATA_OUT		,
+	output						Y_DATA_VALID_OUT,
 	output			          	Y_FULL_OUT		
 );
 
 // wire and reg definition
 wire [2:0] router_add;
 
+wire [`DATA_WIDTH-1:0] IN_data_local;
+wire [`DATA_WIDTH-1:0] IN_data_x;
+wire [`DATA_WIDTH-1:0] IN_data_y;
+wire IN_data_valid_local;
+wire IN_data_valid_x;
+wire IN_data_valid_y;
 
-reg buffer_x_vaild	[0:2];
-reg buffer_y_vaild	[0:2];
-reg buffer_local_vaild	[0:2];
-reg [31:0] buffer_x [0:2];
-reg [31:0] buffer_y [0:2];
-reg [31:0] buffer_local [0:2];
+wire [`DATA_WIDTH-1:0] OUT_data_in_x;
+wire [`DATA_WIDTH-1:0] OUT_data_in_y;
+wire [`DATA_WIDTH-1:0] OUT_data_in_local;
+
+
 
 wire en_x;
-reg en_buffer_x;
-reg [32:0] fifo_data_buffer_x;
-reg fifo_data_valid_x;
-wire [`DATA_WIDTH-1:0] fifo_rd_data_x;
-wire fifo_rd_en_x;
 wire fifo_almost_full_x;
 wire fifo_full_x;
 wire fifo_almost_empty_x;
 wire fifo_empty_x;
-wire [2:0] x_dst;
+wire [2:0] RC_x_dst;
 wire [2:0] port_x_dst;
 
 wire en_y;
-reg en_buffer_y;
-reg [32:0] fifo_data_buffer_y;
-reg fifo_data_valid_y;
-wire [`DATA_WIDTH-1:0]fifo_rd_data_y;
-wire fifo_rd_en_y;
 wire fifo_almost_full_y;
 wire fifo_full_y;
 wire fifo_almost_empty_y;
 wire fifo_empty_y;
-wire [2:0] y_dst;
+wire [2:0] RC_y_dst;
 wire [2:0] port_y_dst;
 
 wire en_local;
-reg en_buffer_local;
-reg [32:0] fifo_data_buffer_local;
-reg fifo_data_valid_local;
-wire [`DATA_WIDTH-1:0]fifo_rd_data_local;
-wire fifo_rd_en_local;
 wire fifo_almost_full_local;
 wire fifo_full_local;
 wire fifo_almost_empty_local;
 wire fifo_empty_local;
-wire [2:0] local_dst;
+wire [2:0] RC_local_dst;
 wire [2:0] port_local_dst;
 
 wire x_SA_vaild;
@@ -125,239 +115,109 @@ wire [2:0] port_sw_local;
 // ROUTER ADDRESS
 assign router_add = ROUTER_ADDRESS;
 
-// FIFO_IN
-sync_fifo_8x32 unit_fifo_local(
+// INPUT UNIT
+
+input_unit input_unit_local
+(
 	.clk(clk),
 	.rst_n(rst_n),
-	.wr_en(LOCAL_DATA_VALID_IN),
-	.wr_data(LOCAL_DATA_IN),
+	.enable(en_local),
+	.data_valid_in(LOCAL_DATA_VALID_IN),
+	.data_in(LOCAL_DATA_IN),
+	
 	.almost_full(fifo_almost_full_local),
 	.full(LOCAL_FULL_OUT),
-	
-	.rd_en(fifo_rd_en_local),
-	.rd_data(fifo_rd_data_local),
 	.almost_empty(fifo_almost_empty_local),
-	.empty(fifo_empty_local)
+	.empty(fifo_empty_local),
+	
+	.data_out(IN_data_local),
+	.data_valid(IN_data_valid_local)
 );
 
-
-sync_fifo_8x32 unit_fifo_x(
+input_unit input_unit_x
+(
 	.clk(clk),
 	.rst_n(rst_n),
-	.wr_en(X_DATA_VALID_IN),
-	.wr_data(X_DATA_IN),
+	.enable(en_x),
+	.data_valid_in(X_DATA_VALID_IN),
+	.data_in(X_DATA_IN),
+	
 	.almost_full(fifo_almost_full_x),
 	.full(X_FULL_OUT),
-	
-	.rd_en(fifo_rd_en_x),
-	.rd_data(fifo_rd_data_x),
 	.almost_empty(fifo_almost_empty_x),
-	.empty(fifo_empty_x)
+	.empty(fifo_empty_x),
+	
+	.data_out(IN_data_x),
+	.data_valid(IN_data_valid_x)
 );
 
-
-sync_fifo_8x32 unit_fifo_y(
+input_unit input_unit_y
+(
 	.clk(clk),
 	.rst_n(rst_n),
-	.wr_en(Y_DATA_VALID_IN),
-	.wr_data(Y_DATA_IN),
+	.enable(en_y),
+	.data_valid_in(Y_DATA_VALID_IN),
+	.data_in(Y_DATA_IN),
+	
 	.almost_full(fifo_almost_full_y),
 	.full(Y_FULL_OUT),
-	
-	.rd_en(fifo_rd_en_y),
-	.rd_data(fifo_rd_data_y),
 	.almost_empty(fifo_almost_empty_y),
-	.empty(fifo_empty_y)
+	.empty(fifo_empty_y),
+	
+	.data_out(IN_data_y),
+	.data_valid(IN_data_valid_y)
 );
-	// x_fifo_buffer
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		fifo_data_valid_x <= 0;
-	end
-	else begin
-		fifo_data_valid_x <= fifo_rd_en_x;
-	end
-end
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		en_buffer_x <= 1;
-	end
-	else begin
-		en_buffer_x <= en_x;
-	end
-end
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		fifo_data_buffer_x <= 0;
-	end
-	else if(en_buffer_x) begin
-		fifo_data_buffer_x <= {fifo_data_valid_x, fifo_rd_data_x};
-	end
-end
 
-	// y_fifo_buffer
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		fifo_data_valid_y <= 0;
-	end
-	else begin
-		fifo_data_valid_y <= fifo_rd_en_y;
-	end
-end
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		en_buffer_y <= 1;
-	end
-	else begin
-		en_buffer_y <= en_y;
-	end
-end
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		fifo_data_buffer_y <= 0;
-	end
-	else if(en_buffer_y) begin
-		fifo_data_buffer_y <= {fifo_data_valid_y, fifo_rd_data_y};
-	end
-end
-	// local_fifo_buffer
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		fifo_data_valid_local <= 0;
-	end
-	else begin
-		fifo_data_valid_local <= fifo_rd_en_local;
-	end
-end
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		en_buffer_local <= 1;
-	end
-	else begin
-		en_buffer_local <= en_local;
-	end
-end
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		fifo_data_buffer_local <= 0;
-	end
-	else if(en_buffer_local) begin
-		fifo_data_buffer_local <= {fifo_data_valid_local, fifo_rd_data_local};
-	end
-end
-// BR
+// DATA_TRANSFER_IN2OUT
 
-	// x pipeline buffer
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		{buffer_x_vaild[0],buffer_x[0]} <= 0;
-	end
-	else if(en_x) begin
-		if(!en_buffer_x) begin
-			{buffer_x_vaild[0],buffer_x[0]} <= fifo_data_buffer_x;
-		end
-		else begin
-			{buffer_x_vaild[0],buffer_x[0]} <= {fifo_data_valid_x, fifo_rd_data_x};
-		end
-	end
-end
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		{buffer_x_vaild[1],buffer_x[1]} <= 0;
-	end
-	else if(en_x) begin
-		{buffer_x_vaild[1],buffer_x[1]} <= {buffer_x_vaild[0],buffer_x[0]};
-	end
-end
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		{buffer_x_vaild[2],buffer_x[2]} <= 0;
-	end
-	else if(en_x) begin
-		{buffer_x_vaild[2],buffer_x[2]} <= {buffer_x_vaild[1],buffer_x[1]};
-	end
-end
-	// y pipeline buffer
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		{buffer_y_vaild[0],buffer_y[0]} <= 0;
-	end
-	else if(en_y) begin
-		if(!en_buffer_y) begin
-			{buffer_y_vaild[0],buffer_y[0]} <= fifo_data_buffer_y;
-		end
-		else begin
-			{buffer_y_vaild[0],buffer_y[0]} <= {fifo_data_valid_y, fifo_rd_data_y};
-		end
-	end
-end
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		{buffer_y_vaild[1],buffer_y[1]} <= 0;
-	end
-	else if(en_y) begin
-		{buffer_y_vaild[1],buffer_y[1]} <= {buffer_y_vaild[0],buffer_y[0]};
-	end
-end
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		{buffer_y_vaild[2],buffer_y[2]} <= 0;
-	end
-	else if(en_y) begin
-		{buffer_y_vaild[2],buffer_y[2]} <= {buffer_y_vaild[1],buffer_y[1]};
-	end
-end
-	// local pipeline buffer
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		{buffer_local_vaild[0],buffer_local[0]} <= 0;
-	end
-	else if(en_local) begin
-		if(!en_buffer_local) begin
-			{buffer_local_vaild[0],buffer_local[0]} <= fifo_data_buffer_local;
-		end
-		else begin
-			{buffer_local_vaild[0],buffer_local[0]} <= {fifo_data_valid_local, fifo_rd_data_local};
-		end
-	end
-end
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		{buffer_local_vaild[1],buffer_local[1]} <= 0;
-	end
-	else if(en_local) begin
-		{buffer_local_vaild[1],buffer_local[1]} <= {buffer_local_vaild[0],buffer_local[0]};
-	end
-end
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		{buffer_local_vaild[2],buffer_local[2]} <= 0;
-	end
-	else if(en_local) begin
-		{buffer_local_vaild[2],buffer_local[2]} <= {buffer_local_vaild[1],buffer_local[1]};
-	end
-end
-// ROUTER_STATION
+data_transfer transfer_unit_x
+(
+	.clk(clk),
+	.rst_n(rst_n),
+	.enable(en_x),
+	.data_in(IN_data_x),
+	.data_out(OUT_data_in_x)
+);
 
-wire [`DATA_WIDTH-1:0] x_data_tmp;
-assign x_data_tmp = buffer_x[0];
-assign x_dst = x_data_tmp[2:0];
+data_transfer transfer_unit_y
+(
+	.clk(clk),
+	.rst_n(rst_n),
+	.enable(en_y),
+	.data_in(IN_data_y),
+	.data_out(OUT_data_in_y)
+);
 
-wire [`DATA_WIDTH-1:0] y_data_tmp;
-assign y_data_tmp = buffer_y[0];
-assign y_dst = y_data_tmp[2:0];
+data_transfer transfer_unit_local
+(
+	.clk(clk),
+	.rst_n(rst_n),
+	.enable(en_local),
+	.data_in(IN_data_local),
+	.data_out(OUT_data_in_local)
+);
 
-wire [`DATA_WIDTH-1:0] local_data_tmp;
-assign local_data_tmp = buffer_local[0];
-assign local_dst = local_data_tmp[2:0];
+// ROUTER_COMPUTER
+
+wire [`DATA_WIDTH-1:0] RC_x_data_temp;
+assign RC_x_data_temp = IN_data_x;
+assign RC_x_dst = RC_x_data_temp[2:0];
+
+wire [`DATA_WIDTH-1:0] RC_y_data_temp;
+assign RC_y_data_temp = IN_data_y;
+assign RC_y_dst = RC_y_data_temp[2:0];
+
+wire [`DATA_WIDTH-1:0] RC_local_data_temp;
+assign RC_local_data_temp = IN_data_local;
+assign RC_local_dst = RC_local_data_temp[2:0];
 
 router_compute_3port router_compute_x(
 	.clk(clk),
 	.rst_n(rst_n),
 	.en(en_x),
-	.valid(buffer_x_vaild[0]),
+	.valid(IN_data_valid_x),
 	.router_add(router_add),
-	.dst(x_dst),
+	.dst(RC_x_dst),
 	.port(port_x_dst)
 );
 
@@ -366,9 +226,9 @@ router_compute_3port router_compute_y(
 	.clk(clk),
 	.rst_n(rst_n),
 	.en(en_y),
-	.valid(buffer_y_vaild[0]),
+	.valid(IN_data_valid_y),
 	.router_add(router_add),
-	.dst(y_dst),
+	.dst(RC_y_dst),
 	.port(port_y_dst)
 );
 
@@ -377,9 +237,9 @@ router_compute_3port router_compute_local(
 	.clk(clk),
 	.rst_n(rst_n),
 	.en(en_local),
-	.valid(buffer_local_vaild[0]),
+	.valid(IN_data_valid_local),
 	.router_add(router_add),
-	.dst(local_dst),
+	.dst(RC_local_dst),
 	.port(port_local_dst)
 );
 
@@ -405,92 +265,52 @@ switch_allocation_3port unit_sa(
 );
 
 
-// OUT
+// OUT Unit
 
-	// X_DATA_OUT
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		X_DATA_OUT <= 0;
-	end
-	else begin
-		if(X_FULL_IN) X_DATA_OUT <= X_DATA_OUT;
-		else if(port_sw_x != `SW_STOP) begin
-			if(port_sw_x == `SW_X1) X_DATA_OUT <= buffer_x[2];
-			else if(port_sw_x == `SW_Y1) X_DATA_OUT <= buffer_y[2];
-			else if(port_sw_x == `SW_LOCAL) X_DATA_OUT <= buffer_local[2];
-		end
-		else X_DATA_OUT <= 0;
-	end
-end
-	// X_DATA_VALID_OUT
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		X_DATA_VALID_OUT <= 0;
-	end
-	else begin
-		if(X_FULL_IN) X_DATA_VALID_OUT <= X_DATA_VALID_OUT;
-		else if(!X_FULL_IN && port_sw_x != `SW_STOP) begin
-			X_DATA_VALID_OUT <= 1;
-		end
-		else X_DATA_VALID_OUT <= 0;
-	end
-end
 
-	// Y_DATA_OUT
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		Y_DATA_OUT <= 0;
-	end
-	else begin
-		if(Y_FULL_IN) Y_DATA_OUT <= Y_DATA_OUT;
-		else if(port_sw_y != `SW_STOP) begin
-			if(port_sw_y == `SW_X1) Y_DATA_OUT <= buffer_x[2];
-			else if(port_sw_y == `SW_Y1) Y_DATA_OUT <= buffer_y[2];
-			else if(port_sw_y == `SW_LOCAL) Y_DATA_OUT <= buffer_local[2];
-		end
-		else Y_DATA_OUT <= 0;
-	end
-end
-	// Y_DATA_VALID_OUT
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		Y_DATA_VALID_OUT <= 0;
-	end
-	else begin
-		if(Y_FULL_IN) Y_DATA_VALID_OUT <= Y_DATA_VALID_OUT;
-		else if(!Y_FULL_IN && port_sw_y != `SW_STOP) begin
-			Y_DATA_VALID_OUT <= 1;
-		end
-		else Y_DATA_VALID_OUT <= 0;
-	end
-end
+// X PORT
+out_unit_3port out_unit_x(
+	.clk(clk),
+	.rst_n(rst_n),
+	.full(X_FULL_IN),
+	.port_sw_id(port_sw_x),
+	.data_in_x(OUT_data_in_x),
+	.data_in_y(OUT_data_in_y),
+	.data_in_local(OUT_data_in_local),
+	
+	.data_out(X_DATA_OUT),
+	.data_valid(X_DATA_VALID_OUT)
+); // X PORT
 
-	// LOCAL_DATA_OUT
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		LOCAL_DATA_OUT <= 0;
-	end
-	else begin
-		if(port_sw_local != `SW_STOP) begin
-			if(port_sw_local == `SW_X1) LOCAL_DATA_OUT <= buffer_x[2];
-			else if(port_sw_local == `SW_Y1) LOCAL_DATA_OUT <= buffer_y[2];
-			else if(port_sw_local == `SW_LOCAL) LOCAL_DATA_OUT <= buffer_local[2];
-		end
-		else LOCAL_DATA_OUT <= 0;
-	end
-end
-	// LOCAL_DATA_VALID_OUT
-always@(posedge clk or negedge rst_n) begin
-	if(!rst_n) begin
-		LOCAL_DATA_VALID_OUT <= 0;
-	end
-	else begin
-		if(port_sw_local != `SW_STOP) begin
-			LOCAL_DATA_VALID_OUT <= 1;
-		end
-		else LOCAL_DATA_VALID_OUT <= 0;
-	end
-end
+
+// Y PORT
+out_unit_3port out_unit_y(
+	.clk(clk),
+	.rst_n(rst_n),
+	.full(Y_FULL_IN),
+	.port_sw_id(port_sw_y),
+	.data_in_x(OUT_data_in_x),
+	.data_in_y(OUT_data_in_y),
+	.data_in_local(OUT_data_in_local),
+	
+	.data_out(Y_DATA_OUT),
+	.data_valid(Y_DATA_VALID_OUT)
+); // Y PORT
+
+
+// LOCAL PORT
+out_unit_3port out_unit_local(
+	.clk(clk),
+	.rst_n(rst_n),
+	.full(1'b0), // LOCAL_FULL_IN IS ALWAYS LOW
+	.port_sw_id(port_sw_local),
+	.data_in_x(OUT_data_in_x),
+	.data_in_y(OUT_data_in_y),
+	.data_in_local(OUT_data_in_local),
+	
+	.data_out(LOCAL_DATA_OUT),
+	.data_valid(LOCAL_DATA_VALID_OUT)
+); // LOCAL PORT
 
 //Control
 
@@ -506,15 +326,12 @@ flow_control_3port unit_flow_control(
 	.valid_local(local_SA_vaild),
 	
 	.empty_x(fifo_empty_x),
-	.en_fifo_x(fifo_rd_en_x),
 	.en_x(en_x),
 	
 	.empty_y(fifo_empty_y),
-	.en_fifo_y(fifo_rd_en_y),
 	.en_y(en_y),
 	
 	.empty_local(fifo_empty_local),
-	.en_fifo_local(fifo_rd_en_local),
 	.en_local(en_local)
 );
 

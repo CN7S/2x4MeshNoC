@@ -134,9 +134,9 @@ wire [7:0] flush_wire;
 wire [7:0] task_send_finish_flag;
 wire [7:0] task_receive_finish_flag;
 
-wire [7:0][6:0] so_retrsreq_receive_flag;
+wire [7:0][7:0] so_retrsreq_receive_flag;
 wire [7:0][7:0] so_retrsreq_receive_num;
-wire [7:0][6:0] so_retrsreq_send_flag;
+wire [7:0][7:0] so_retrsreq_send_flag;
 wire [7:0][7:0] so_retrsreq_send_num;
 wire [7:0][7:0] latency_max;
 wire [7:0][7:0] latency_min;

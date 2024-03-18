@@ -46,15 +46,12 @@ input 		valid_y		,
 input		valid_local	,
 
 input 		empty_x		,
-output 		en_fifo_x	,
 output 	reg	en_x		,
 
 input 		empty_y		,
-output 		en_fifo_y	,
 output 	reg 	en_y		,
 
 input 		empty_local	,
-output 		en_fifo_local	,
 output 	reg 	en_local
 
 );
@@ -72,7 +69,6 @@ begin
 	else 	en_x = 1;
 end
 
-assign en_fifo_x = (en_x && !empty_x);
 
 // y_flow
 always@(*)
@@ -87,7 +83,6 @@ begin
 	else 	en_y = 1;
 end
 
-assign en_fifo_y = (en_y && !empty_y);
 
 // local_flow
 always@(*)
@@ -102,6 +97,5 @@ begin
 	else 	en_local = 1;
 end
 
-assign en_fifo_local = (en_local && !empty_local);
 
 endmodule

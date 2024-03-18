@@ -929,7 +929,7 @@ module PE#(
     always @(posedge clk, negedge rst_n) begin
         if(!rst_n)
             start <= 1'b0;
-		// else if(!enable)	// ????????
+		// else if(!enable)	// test debug
 			// start <= 1'b0;
         else if(valid_p2r && (data_p2r[`SRC_MAX:`SRC_MIN] == MY_ID))
             start <= 1'b1;
@@ -1150,7 +1150,8 @@ module PE#(
             valid_p2r <= 1'b0;
         else if(!enable)
             valid_p2r <= valid_p2r;
-        else if(full)
+		else if(full) // origin
+        // else if(!task_receive_finish_flag && full) // debug test
             valid_p2r <= valid_enable;
         else if(!valid_enable)
             valid_p2r <= 1'b0;
