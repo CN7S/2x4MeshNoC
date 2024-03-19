@@ -104,6 +104,7 @@ assign port_x2_dst_tmp = port_x2_en ? port_x2_dst : port_x2_dst_buf;
 assign port_y_dst_tmp =  port_y_en ? port_y_dst : port_y_dst_buf;
 assign port_local_dst_tmp =  port_local_en ? port_local_dst : port_local_dst_buf;
 
+
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) begin
 		port_x1_dst_buf <= `EMPTY;
@@ -119,6 +120,8 @@ always@(posedge clk or negedge rst_n) begin
 	end
 end
 
+
+// priority for out x1
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) begin
 		out_x1_priority_x1 			<= 1'b1;
@@ -132,7 +135,8 @@ always@(posedge clk or negedge rst_n) begin
 		out_x1_priority_y			<= out_x1_priority_x2;
 		out_x1_priority_local		<= out_x1_priority_y;
 	end
-end
+end // priority for out x1
+// priority for out x2
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) begin
 		out_x2_priority_x1 			<= 1'b1;
@@ -146,7 +150,8 @@ always@(posedge clk or negedge rst_n) begin
 		out_x2_priority_y			<= out_x2_priority_x2;
 		out_x2_priority_local		<= out_x2_priority_y;
 	end
-end
+end // priority for out x2
+// priority for out y
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) begin
 		out_y_priority_x1 			<= 1'b1;
@@ -160,7 +165,8 @@ always@(posedge clk or negedge rst_n) begin
 		out_y_priority_y			<= out_y_priority_x2;
 		out_y_priority_local		<= out_y_priority_y;
 	end
-end
+end // priority for out y
+// priority for out local
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) begin
 		out_local_priority_x1 			<= 1'b1;
@@ -174,8 +180,9 @@ always@(posedge clk or negedge rst_n) begin
 		out_local_priority_y			<= out_local_priority_x2;
 		out_local_priority_local		<= out_local_priority_y;
 	end
-end
+end // priority for out local
 
+// out sw id
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) begin
 		out_x1_sw			<= `SW_STOP;
@@ -189,8 +196,9 @@ always@(posedge clk or negedge rst_n) begin
 		out_y_sw			<= out_y_sw_temp;
 		out_local_sw		<= out_local_sw_temp;
 	end
-end
+end // out sw id
 
+// port valid signal
 always@(posedge clk or negedge rst_n) begin
 	if(!rst_n) begin
 		port_x1_valid 		<= 0;
@@ -208,7 +216,7 @@ always@(posedge clk or negedge rst_n) begin
 		if(port_local_dst_tmp != `EMPTY) port_local_valid <= 1;
 		else					port_local_valid <= 0;
 	end
-end
+end // port valid signal
 
 
 // out_local_port
@@ -281,7 +289,7 @@ always@(*) begin
 			out_local_sw_temp = `SW_STOP;
 		end
 	end
-end
+end // out_local_port
 
 
 // out_x1_port
@@ -354,7 +362,7 @@ always@(*) begin
 			out_x1_sw_temp = `SW_STOP;
 		end
 	end
-end
+end // out_x1_port
 
 // out_x2_port
 always@(*) begin
@@ -426,7 +434,7 @@ always@(*) begin
 			out_x2_sw_temp = `SW_STOP;
 		end
 	end
-end
+end // out_x1_port
 
 // out_y_port
 always@(*) begin
@@ -498,6 +506,6 @@ always@(*) begin
 			out_y_sw_temp = `SW_STOP;
 		end
 	end
-end
+end // out_y_port
 
 endmodule

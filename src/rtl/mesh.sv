@@ -1,5 +1,5 @@
 // +FHDR-----------------------------------------------------------------------
-// Copyright.
+// Copyright. SJTU 2024 Spring DIC Course.
  // ----------------------------------------------------------------------------
 // FILE NAME      : mesh.sv
  // DEPARTMENT     : 
@@ -10,9 +10,9 @@
  // VERSION DATE        AUTHOR  DESCRIPTION
  // 1.0  2024/03/13    Yuxin Chen 	    
 // ----------------------------------------------------------------------------
-// KEYWORDS    : mesh
+// KEYWORDS    : mesh staticXY
  // ----------------------------------------------------------------------------
-// PURPOSE     : Construct 2x4 Mesh NOC. 
+// PURPOSE     : Construct 2x4 Mesh NOC based on static XY routing protocol. 
  // ----------------------------------------------------------------------------
 // PARAMETERS
  //     PARAM NAME      RANGE    : DESCRIPTION         : DEFAULT : UNITS

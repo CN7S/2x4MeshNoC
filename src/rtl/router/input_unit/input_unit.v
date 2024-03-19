@@ -1,7 +1,7 @@
 // +FHDR-----------------------------------------------------------------------
 // Copyright.
  // ----------------------------------------------------------------------------
-// FILE NAME      : input_unit_4port.v
+// FILE NAME      : input_unit.v
  // DEPARTMENT     : 
  // AUTHOR         : Yuxin Chen
  // AUTHOR’S EMAIL : cyx1324841682@sjtu.edu.cn
