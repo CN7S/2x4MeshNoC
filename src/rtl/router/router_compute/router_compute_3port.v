@@ -8,7 +8,7 @@
 // ----------------------------------------------------------------------------
 // RELEASE HISTORY
  // VERSION DATE        AUTHOR  DESCRIPTION
- // 1.0  2024-03-13  Yi Wan     
+ // 1.1  2024-03-21  Yi Wan     
 // ----------------------------------------------------------------------------
 // KEYWORDS    : 3-port static routing
  // ----------------------------------------------------------------------------
@@ -33,17 +33,21 @@
 
 module router_compute_3port
 (
-	input 			clk,
-	input 			rst_n,
-	input 			en,
-
-	input			valid,
-	input		[2:0]	router_add,
-	input		[2:0]	dst,
+	input 					clk,
+	input 					rst_n,
+	input 					en,
+	input					valid,
+	
+	input			[31:0]	data,
+	input			[2:0]	router_add,	//address of router
+	
+	input 			[2:0]	stress_x,	//stress of x_port
+	input 			[2:0]   stress_y,	//stress of y_port
 
   	output	reg 	[2:0]	port
 );
 
+//port
 always@(posedge clk or negedge rst_n) 
 begin
 	if (!rst_n) 
@@ -52,13 +56,21 @@ begin
 	begin
 		if(!valid)
 			port <= `EMPTY;
-		else if (router_add[1:0] != dst[1:0])
-			port <= `OUT_X1_PORT;
-		else if (router_add[2] != dst[2])
-			port <= `OUT_Y1_PORT;
 		else 
-			port <= `OUT_LOCAL_PORT;
+			if (router_add[2:0] == data[2:0])
+				port <= `OUT_LOCAL_PORT;
+			else 
+				if (router_add[2] == data[2] )
+					port <= `OUT_X1_PORT_PORT;
+				else 
+					if (router_add[1:0] == data[1:0]) 
+					port <= `OUT_Y1_PORT;
+					else 
+						if (stress_x < stress_y)
+							port <= `OUT_X1_PORT;
+						else 
+							port <= `OUT_Y1_PORT;
 	end
-end
+end//port
 
 endmodule
