@@ -1,0 +1,25 @@
+ 
+****************************************
+Report : area
+Design : router_normal_chip
+Version: D-2010.03-SP5-3
+Date   : Mon Mar 25 18:38:53 2024
+****************************************
+
+Library(s) Used:
+
+    slow (File: /home/student/Desktop/Workspace/SMIC18/db/slow.db)
+    SP018W_V1p5_max (File: /home/student/Desktop/Workspace/SMIC18/db/SP018W_V1p5_max.db)
+
+Number of ports:              273
+Number of nets:               546
+Number of cells:              274
+Number of references:           3
+
+Combinational area:       4434811.315018
+Noncombinational area:    133062.653992
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:          4567873.969009
+Total area:                 undefined
+1

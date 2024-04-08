@@ -1,0 +1,76 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : router_normal_chip
+Version: D-2010.03-SP5-3
+Date   : Mon Mar 25 18:38:53 2024
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: slow   Library: slow
+Wire Load Model Mode: segmented
+
+  Startpoint: insc_router/input_unit_local/unit_fifo_local/waddr_reg[0]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: LOCAL_FULL_OUT
+            (output port clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             4.30       4.30
+  insc_router/input_unit_local/unit_fifo_local/waddr_reg[0]/CK (DFFRHQX1)
+                                                          0.00 #     4.30 r
+  insc_router/input_unit_local/unit_fifo_local/waddr_reg[0]/Q (DFFRHQX1)
+                                                          0.41       4.71 r
+  insc_router/input_unit_local/unit_fifo_local/U59/Y (BUFX3)
+                                                          0.23       4.94 r
+  insc_router/input_unit_local/unit_fifo_local/U36/Y (XOR2X1)
+                                                          0.29       5.23 f
+  insc_router/input_unit_local/unit_fifo_local/U19/Y (OAI21XL)
+                                                          0.18       5.41 r
+  insc_router/input_unit_local/unit_fifo_local/U18/Y (OAI2BB1X1)
+                                                          0.13       5.53 f
+  insc_router/input_unit_local/unit_fifo_local/U4/Y (OAI21XL)
+                                                          0.17       5.71 r
+  insc_router/input_unit_local/unit_fifo_local/U37/Y (OAI2BB1X1)
+                                                          0.10       5.80 f
+  insc_router/input_unit_local/unit_fifo_local/U41/Y (XNOR2X1)
+                                                          0.25       6.06 f
+  insc_router/input_unit_local/unit_fifo_local/U40/Y (NAND2X1)
+                                                          0.08       6.13 r
+  insc_router/input_unit_local/unit_fifo_local/U39/Y (OAI31X1)
+                                                          0.10       6.24 f
+  insc_router/input_unit_local/unit_fifo_local/U38/Y (INVX1)
+                                                          0.11       6.35 r
+  insc_router/input_unit_local/unit_fifo_local/U33/Y (NAND4X1)
+                                                          0.13       6.48 f
+  insc_router/input_unit_local/unit_fifo_local/U3/Y (INVX1)
+                                                          0.56       7.03 r
+  insc_router/input_unit_local/unit_fifo_local/full (sync_fifo_8x32_3)
+                                                          0.00       7.03 r
+  insc_router/input_unit_local/full (input_unit_3)        0.00       7.03 r
+  insc_router/LOCAL_FULL_OUT (router_normal)              0.00       7.03 r
+  PO8W_LOCAL_DATA_FULL_OUT/PAD (PO8W)                     1.75       8.78 r
+  LOCAL_FULL_OUT (out)                                    0.00       8.78 r
+  data arrival time                                                  8.78
+
+  clock clk (rise edge)                                  10.00      10.00
+  clock network delay (ideal)                             4.30      14.30
+  clock uncertainty                                      -0.50      13.80
+  output external delay                                  -5.00       8.80
+  data required time                                                 8.80
+  --------------------------------------------------------------------------
+  data required time                                                 8.80
+  data arrival time                                                 -8.78
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.02
+
+
+1

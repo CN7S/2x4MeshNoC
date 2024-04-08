@@ -1,0 +1,16 @@
+Information: Updating graph... (UID-83)
+Warning: Design 'router_border_chip' contains 2 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+Information: Updating design information... (UID-85)
+Warning: Design 'router_border_chip' contains 2 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : constraint
+        -all_violators
+Design : router_border_chip
+Version: D-2010.03-SP5-3
+Date   : Mon Mar 25 18:37:18 2024
+****************************************
+
+This design has no violated constraints.
+
+1

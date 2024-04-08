@@ -45,6 +45,15 @@ module mesh(
 	
 	// pe config
 	input [7:0] pe_enable,
+	input [7:0] pe_dbg_mode_wire,
+	input [23:0] pe_send_num_wire,
+	input [23:0] pe_receive_num_wire,
+	input [31:0] pe_rate_wire,
+	input [191:0] pe_dst_seq_wire,
+	input [31:0] pe_mode_wire,
+	
+	
+	input [7:0] pe_flush_wire,
 	
 	output [7:0] pe_task_receive_finish_flag,
 	output [7:0] pe_task_send_finish_flag

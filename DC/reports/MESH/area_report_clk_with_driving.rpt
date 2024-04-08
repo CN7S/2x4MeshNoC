@@ -1,0 +1,25 @@
+ 
+****************************************
+Report : area
+Design : mesh_chip
+Version: D-2010.03-SP5-3
+Date   : Mon Mar 25 18:47:41 2024
+****************************************
+
+Library(s) Used:
+
+    slow (File: /home/student/Desktop/Workspace/SMIC18/db/slow.db)
+    SP018W_V1p5_max (File: /home/student/Desktop/Workspace/SMIC18/db/SP018W_V1p5_max.db)
+
+Number of ports:              346
+Number of nets:               692
+Number of cells:              347
+Number of references:           3
+
+Combinational area:       7062891.938357
+Noncombinational area:    1397327.513115
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:          8460219.451472
+Total area:                 undefined
+1

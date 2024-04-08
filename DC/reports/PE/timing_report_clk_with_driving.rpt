@@ -1,0 +1,70 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : PE_chip
+Version: D-2010.03-SP5-3
+Date   : Mon Mar 25 18:33:11 2024
+****************************************
+
+Operating Conditions: slow   Library: slow
+Wire Load Model Mode: segmented
+
+  Startpoint: data_r2p[18]
+              (input port clocked by clk)
+  Endpoint: insc_PE/PE_single_110/diff_counter_reg[0]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             4.30       4.30
+  input external delay                                    5.00       9.30 r
+  data_r2p[18] (in)                                       0.32       9.62 r
+  PIW_net_data_r2p18/C (PIW)                              0.79      10.40 r
+  insc_PE/data_r2p[18] (PE)                               0.00      10.40 r
+  insc_PE/U1558/Y (INVX8)                                 0.04      10.45 f
+  insc_PE/U1557/Y (INVX8)                                 0.09      10.54 r
+  insc_PE/PE_single_110/data_r2p[18] (PE_single_0_6_1)
+                                                          0.00      10.54 r
+  insc_PE/PE_single_110/U407/Y (INVX2)                    0.05      10.58 f
+  insc_PE/PE_single_110/U28/Y (INVX1)                     0.20      10.78 r
+  insc_PE/PE_single_110/U9/Y (OR2X2)                      0.16      10.94 r
+  insc_PE/PE_single_110/U48/Y (AOI31XL)                   0.14      11.08 f
+  insc_PE/PE_single_110/U226/Y (NOR2X1)                   0.11      11.19 r
+  insc_PE/PE_single_110/U98/Y (NOR2XL)                    0.07      11.26 f
+  insc_PE/PE_single_110/U190/Y (OAI21XL)                  0.15      11.41 r
+  insc_PE/PE_single_110/U49/Y (AOI21XL)                   0.11      11.52 f
+  insc_PE/PE_single_110/U194/Y (OAI21XL)                  0.18      11.70 r
+  insc_PE/PE_single_110/U191/Y (AOI21X1)                  0.14      11.85 f
+  insc_PE/PE_single_110/U86/Y (OAI21X2)                   0.14      11.99 r
+  insc_PE/PE_single_110/U12/Y (NAND3BX1)                  0.15      12.14 f
+  insc_PE/PE_single_110/U13/Y (INVX1)                     0.12      12.26 r
+  insc_PE/PE_single_110/U22/Y (BUFX3)                     0.35      12.61 r
+  insc_PE/PE_single_110/U23/Y (NAND2X1)                   0.10      12.71 f
+  insc_PE/PE_single_110/U27/Y (BUFX3)                     0.22      12.93 f
+  insc_PE/PE_single_110/U169/Y (NAND2X1)                  0.34      13.27 r
+  insc_PE/PE_single_110/U337/Y (OAI221XL)                 0.17      13.45 f
+  insc_PE/PE_single_110/diff_counter_reg[0]/D (DFFRHQX1)
+                                                          0.00      13.45 f
+  data arrival time                                                 13.45
+
+  clock clk (rise edge)                                  10.00      10.00
+  clock network delay (ideal)                             4.30      14.30
+  clock uncertainty                                      -0.50      13.80
+  insc_PE/PE_single_110/diff_counter_reg[0]/CK (DFFRHQX1)
+                                                          0.00      13.80 r
+  library setup time                                     -0.35      13.45
+  data required time                                                13.45
+  --------------------------------------------------------------------------
+  data required time                                                13.45
+  data arrival time                                                -13.45
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+1
