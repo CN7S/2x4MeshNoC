@@ -3,7 +3,7 @@
 Report : area
 Design : router_border_chip
 Version: D-2010.03-SP5-3
-Date   : Mon Mar 25 18:37:18 2024
+Date   : Wed May 12 12:37:32 2021
 ****************************************
 
 Library(s) Used:
@@ -12,14 +12,14 @@ Library(s) Used:
     SP018W_V1p5_max (File: /home/student/Desktop/Workspace/SMIC18/db/SP018W_V1p5_max.db)
 
 Number of ports:              205
-Number of nets:               410
-Number of cells:              206
-Number of references:           3
+Number of nets:               458
+Number of cells:              254
+Number of references:           5
 
-Combinational area:       3328152.542222
-Noncombinational area:    99589.090492
+Combinational area:       3342668.951888
+Noncombinational area:    105659.770935
 Net Interconnect area:      undefined  (No wire load specified)
 
-Total cell area:          3427741.632714
+Total cell area:          3448328.722823
 Total area:                 undefined
 1

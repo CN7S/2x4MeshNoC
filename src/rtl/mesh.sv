@@ -113,6 +113,8 @@ wire   [3:0] Y_FULL_OUT_normal;
 
 // PE
 
+
+
 wire [7:0] enable_wire;
 wire [7:0] dbg_mode_wire;
 wire [7:0][2:0] send_num_wire;
@@ -199,13 +201,14 @@ assign full = {LOCAL_FULL_OUT_border[3], LOCAL_FULL_OUT_normal[3],
 				LOCAL_FULL_OUT_normal[0], LOCAL_FULL_OUT_border[0]};
 
 assign enable_wire = pe_enable;
-assign dbg_mode_wire = pe_dbg_mode_wire;
-assign send_num_wire = pe_send_num_wire;
-assign receive_num_wire = pe_receive_num_wire;
-assign rate_wire = pe_rate_wire;
-assign dst_seq_wire = pe_dst_seq_wire;
-assign mode_wire = pe_mode_wire;
-assign flush_wire = pe_flush_wire;
+assign dbg_mode_wire = {8{1'b1}};
+assign send_num_wire = {8{3'b001}};
+assign receive_num_wire = {8{3'b001}};
+assign rate_wire = 0;
+assign dst_seq_wire = {8{4'b0001}};
+assign mode_wire = {24'h0, 24'h1, 24'h2, 24'h3, 24'h4, 24'h5, 24'h6, 24'h7};
+assign flush_wire = {8{1'b1}};
+
 
 assign pe_task_receive_finish_flag = task_receive_finish_flag;
 assign pe_task_send_finish_flag = task_send_finish_flag;

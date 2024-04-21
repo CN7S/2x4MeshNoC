@@ -1,0 +1,384 @@
+Information: linking reference library : /home/student/Desktop/Workspace/SMIC18/mw_lib/smic18_5ml. (PSYN-878)
+Information: linking reference library : /home/student/Desktop/Workspace/SMIC18/mw_lib/SP018W_V1p5_5MT. (PSYN-878)
+Warning: Could not find valid driver for hierarchical Power net 'VDD'. (MWDC-285)
+Warning: Could not find valid driver for hierarchical Ground net 'VSS'. (MWDC-285)
+
+  Linking design 'mesh_chip'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  * (1018 designs)            mesh_chip.CEL, etc
+  slow (library)              /home/student/Desktop/Workspace/SMIC18/db/slow.db
+  SP018W_V1p5_max (library)   /home/student/Desktop/Workspace/SMIC18/db/SP018W_V1p5_max.db
+
+Load global CTS reference options from NID to stack
+# GUI Debug: Building dc from empty. -- Time: 6sec 194ms
+Information: The design has horizontal rows, and Y-symmetry has been used for sites. (MWDC-217)
+Floorplan loading succeeded.
+Warning: Cell 'PIW_clk' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_rstn' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable0' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable1' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable2' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable3' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable4' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable5' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable6' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable7' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag0' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag1' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag2' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag3' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag4' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag5' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag6' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag7' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag0' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag1' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag2' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag3' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag4' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag5' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag6' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag7' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+
+  Loading design 'mesh_chip'
+
+
+Information: Setting a dont_touch attribute on net 'pe_enable[1]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[0]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[1]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[0]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[7]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[6]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[5]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[4]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[3]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[2]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[1]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[0]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[7]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[6]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[5]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[4]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[3]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[2]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'rst_n' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'clk' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[7]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[6]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[5]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[4]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[3]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[2]' because it is connected to a pad cell. (PSYN-088)
+
+
+Information: Library Manufacturing Grid(GridResolution) : 5
+Information: Time Unit from Milkyway design library: 'ns' 
+Information: Design Library and main library timing units are matched - 1.000 ns. 
+Information: Resistance Unit from Milkyway design library: 'kohm' 
+Information: Design Library and main library resistance units are matched - 1.000 kohm. 
+Information: Capacitance Unit from Milkyway design library: 'pf' 
+Information: Design Library and main library capacitance units are matched - 1.000 pf. 
+103239/103265 nets are routed
+Warning: Inconsistent library data found for layer POLY1. (RCEX-018)
+Information: The distance unit in Capacitance and Resistance is 1 micron. (RCEX-007)
+Information: The RC model used is global route TLU+. (RCEX-015)
+Information: Start mixed mode parasitic extraction. (RCEX-023)
+Information: Start rc extraction...
+Memory usage for extraction task 327 Mbytes -- main task 760 Mbytes.
+Warning: Net 'net_clk' is exceeding threshold (over 1000 pins) and will be skipped. (RCEX-020)
+Warning: Net 'net_rst_n' is exceeding threshold (over 1000 pins) and will be skipped. (RCEX-020)
+Information: Parasitic source is LPE. (RCEX-040)
+Information: Parasitic mode is RealRVirtualC. (RCEX-041)
+Information: Using virtual shield extraction. (RCEX-081)
+Information: Extraction mode is MIN_MAX. (RCEX-042)
+Information: Extraction derate is 125/125/125. (RCEX-043)
+Information: Coupling capacitances are lumped to ground. (RCEX-044)
+Information: Start back annotation for parasitic extraction. (RCEX-023)
+Information: End back annotation for parasitic extraction. (RCEX-023)
+Information: Start timing update for parasitic extraction. (RCEX-023)
+Information: Postroute Elmore delays will be computed using RC annotations. (TIM-234)
+Information: End timing update for parasitic extraction. (RCEX-023)
+Information: End parasitic extraction. (RCEX-023)
+Information: Start rc update...
+****************************************************************
+Information: TLUPlus based RC computation is enabled. (RCEX-141)
+****************************************************************
+Information: The distance unit in Capacitance and Resistance is 1 micron. (RCEX-007)
+Information: The RC model used is TLU+. (RCEX-015)
+Information: Library Derived Cap for layer METAL1 : 0.00022 0.0002 (RCEX-011)
+Information: Library Derived Res for layer METAL1 : 0.00044 0.00024 (RCEX-011)
+Information: Library Derived Cap for layer METAL2 : 0.00021 0.00019 (RCEX-011)
+Information: Library Derived Res for layer METAL2 : 0.00036 0.0002 (RCEX-011)
+Information: Library Derived Cap for layer METAL3 : 0.00025 0.00023 (RCEX-011)
+Information: Library Derived Res for layer METAL3 : 0.00036 0.0002 (RCEX-011)
+Information: Library Derived Cap for layer METAL4 : 0.00021 0.00019 (RCEX-011)
+Information: Library Derived Res for layer METAL4 : 0.00036 0.0002 (RCEX-011)
+Information: Library Derived Cap for layer METAL5 : 0.00028 0.00026 (RCEX-011)
+Information: Library Derived Res for layer METAL5 : 0.0001 6.1e-05 (RCEX-011)
+Information: Library Derived Horizontal Cap : 0.00025 0.00023 (RCEX-011)
+Information: Library Derived Horizontal Res : 0.0003 0.00017 (RCEX-011)
+Information: Library Derived Vertical Cap : 0.00021 0.00019 (RCEX-011)
+Information: Library Derived Vertical Res : 0.00036 0.0002 (RCEX-011)
+Information: Using derived R and C coefficients. (RCEX-008)
+Information: Using region-based R and C coefficients. (RCEX-013)
+Information: Library Derived Via Res : 0.0095 0.001 (RCEX-011)
+Information: End rc update.
+Information: The mixed mode parasitic extraction has been performed. (RCEX-202)
+Warning: Cell 'PIW_clk' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_rstn' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable0' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable1' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable2' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable3' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable4' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable5' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable6' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PIW_pe_enable7' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag0' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag1' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag2' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag3' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag4' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag5' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag6' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_receive_finish_flag7' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag0' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag1' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag2' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag3' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag4' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag5' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag6' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Warning: Cell 'PO8W_pe_task_send_finish_flag7' is being marked as "dont_touch" because it has 
+	a fixed_placement attribute. (PSYN-040)
+Information: Updating graph... (UID-83)
+Warning: Design 'mesh_chip' contains 2 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+Information: Updating design information... (UID-85)
+Warning: Design 'mesh_chip' contains 2 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : mesh_chip
+Version: D-2010.03-ICC-SP5-2
+Date   : Thu Apr 11 14:31:34 2024
+****************************************
+
+ * Some/all delay information is back-annotated.
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: slow   Library: slow
+	Parasitic source    : LPE
+	Parasitic mode      : RealRVirtualC
+	Extraction mode     : MIN_MAX
+	Extraction derating : 125/125/125
+
+Information: Percent of Arnoldi-based delays =  0.00%
+
+  Startpoint: pe_enable[5]
+              (input port clocked by clk)
+  Endpoint: insc_mesh/pecore_5__PE_unit/enable_reg
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: INPUTS
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             4.30       4.30
+  input external delay                                    5.00       9.30 f
+  pe_enable[5] (in)                                       0.32       9.62 f
+  PIW_pe_enable5/C (PIW)                                  0.99 *    10.61 f
+  insc_mesh/pe_enable[5] (mesh)                           0.00      10.61 f
+  insc_mesh/pecore_5__PE_unit/enable_wire (PE_5_0_1_2_3_4_6_7)
+                                                          0.00      10.61 f
+  insc_mesh/pecore_5__PE_unit/enable_reg/D (DFFRHQX1)     0.05 &    10.66 f
+  data arrival time                                                 10.66
+
+  clock clk (rise edge)                                  10.00      10.00
+  clock network delay (ideal)                             4.30      14.30
+  clock uncertainty                                      -0.50      13.80
+  insc_mesh/pecore_5__PE_unit/enable_reg/CK (DFFRHQX1)
+                                                          0.00      13.80 r
+  library setup time                                     -0.35      13.45
+  data required time                                                13.45
+  --------------------------------------------------------------------------
+  data required time                                                13.45
+  data arrival time                                                -10.66
+  --------------------------------------------------------------------------
+  slack (MET)                                                        2.79
+
+
+  Startpoint: insc_mesh/pecore_1__PE_unit/task_receive_finish_flag_reg
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: pe_task_receive_finish_flag[1]
+            (output port clocked by clk)
+  Path Group: OUTPUTS
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             4.30       4.30
+  insc_mesh/pecore_1__PE_unit/task_receive_finish_flag_reg/CK (DFFRHQX1)
+                                                          0.00 #     4.30 r
+  insc_mesh/pecore_1__PE_unit/task_receive_finish_flag_reg/Q (DFFRHQX1)
+                                                          4.75       9.05 r
+  insc_mesh/pecore_1__PE_unit/task_receive_finish_flag (PE_1_0_2_3_4_5_6_7)
+                                                          0.00       9.05 r
+  insc_mesh/pe_task_receive_finish_flag[1] (mesh)         0.00       9.05 r
+  PO8W_pe_task_receive_finish_flag1/PAD (PO8W)            2.60 &    11.65 r
+  pe_task_receive_finish_flag[1] (out)                    0.00 *    11.65 r
+  data arrival time                                                 11.65
+
+  clock clk (rise edge)                                  10.00      10.00
+  clock network delay (ideal)                             4.30      14.30
+  clock uncertainty                                      -0.50      13.80
+  output external delay                                  -5.00       8.80
+  data required time                                                 8.80
+  --------------------------------------------------------------------------
+  data required time                                                 8.80
+  data arrival time                                                -11.65
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -2.85
+
+
+  Startpoint: insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/raddr_reg_1_
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: insc_mesh/pecore_3__PE_unit/PE_single_001/retrans_counter_reg_2_
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             4.30       4.30
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/raddr_reg_1_/CK (DFFRHQX1)
+                                                          0.00 #     4.30 r
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/raddr_reg_1_/Q (DFFRHQX1)
+                                                          0.42       4.72 r
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/U65/Y (INVX1)
+                                                          0.19 &     4.91 f
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/U26/Y (INVX1)
+                                                          2.15 &     7.06 r
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/U4/Y (OAI21XL)
+                                                          0.38 &     7.44 f
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/U3/Y (OAI2BB1X1)
+                                                          0.33 &     7.77 r
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/U21/Y (OAI21XL)
+                                                          0.15 &     7.93 f
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/U20/Y (OAI2BB1X1)
+                                                          0.19 &     8.11 r
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/U25/Y (XNOR2X1)
+                                                          0.29 &     8.40 r
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/U24/Y (NAND2X1)
+                                                          0.09 &     8.49 f
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/U23/Y (OAI31X1)
+                                                          0.12 &     8.61 r
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/U22/Y (INVX1)
+                                                          0.18 &     8.80 f
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/U16/Y (NAND4X1)
+                                                          0.92 &     9.72 r
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/U5/Y (INVX1)
+                                                          0.36 &    10.07 f
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/unit_fifo_local/full (sync_fifo_8x32_24)
+                                                          0.00      10.07 f
+  insc_mesh/router_1__genblk1_router_unit/input_unit_local/full (input_unit_24)
+                                                          0.00      10.07 f
+  insc_mesh/router_1__genblk1_router_unit/LOCAL_FULL_OUT (router_border_3)
+                                                          0.00      10.07 f
+  insc_mesh/pecore_3__PE_unit/full (PE_3_0_1_2_4_5_6_7)
+                                                          0.00      10.07 f
+  insc_mesh/pecore_3__PE_unit/U223/Y (OR2X2)              0.40 &    10.47 f
+  insc_mesh/pecore_3__PE_unit/U212/Y (NOR2X1)             0.29 &    10.76 r
+  insc_mesh/pecore_3__PE_unit/U62/Y (INVX1)               0.63 &    11.38 f
+  insc_mesh/pecore_3__PE_unit/U251/Y (NOR3X1)             2.57 &    13.95 r
+  insc_mesh/pecore_3__PE_unit/PE_single_001/retrans_out_flag (PE_single_3_3_1)
+                                                          0.00      13.95 r
+  insc_mesh/pecore_3__PE_unit/PE_single_001/U224/Y (NAND4X1)
+                                                          0.75 &    14.70 f
+  insc_mesh/pecore_3__PE_unit/PE_single_001/U215/Y (AOI2BB1X1)
+                                                          0.48 &    15.17 f
+  insc_mesh/pecore_3__PE_unit/PE_single_001/U212/Y (NOR2BX1)
+                                                          0.21 &    15.39 f
+  insc_mesh/pecore_3__PE_unit/PE_single_001/U27/Y (BUFX3)
+                                                          0.30 &    15.68 f
+  insc_mesh/pecore_3__PE_unit/PE_single_001/U172/Y (AOI222X1)
+                                                          0.46 &    16.15 r
+  insc_mesh/pecore_3__PE_unit/PE_single_001/U171/Y (NAND2X1)
+                                                          0.15 &    16.29 f
+  insc_mesh/pecore_3__PE_unit/PE_single_001/retrans_counter_reg_2_/D (DFFRHQX1)
+                                                          0.00 &    16.29 f
+  data arrival time                                                 16.29
+
+  clock clk (rise edge)                                  10.00      10.00
+  clock network delay (ideal)                             4.30      14.30
+  clock uncertainty                                      -0.50      13.80
+  insc_mesh/pecore_3__PE_unit/PE_single_001/retrans_counter_reg_2_/CK (DFFRHQX1)
+                                                          0.00      13.80 r
+  library setup time                                     -0.36      13.44
+  data required time                                                13.44
+  --------------------------------------------------------------------------
+  data required time                                                13.44
+  data arrival time                                                -16.29
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -2.85
+
+
+1

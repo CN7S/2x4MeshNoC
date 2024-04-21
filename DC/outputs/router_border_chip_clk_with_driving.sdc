@@ -1,6 +1,6 @@
 ###################################################################
 
-# Created by write_sdc on Mon Mar 25 18:37:09 2024
+# Created by write_sdc on Wed May 12 12:37:11 2021
 
 ###################################################################
 set sdc_version 1.8
@@ -214,7 +214,7 @@ set_load -pin_load 4.37 [get_ports {Y_DATA_OUT[0]}]
 set_load -pin_load 4.37 [get_ports Y_DATA_VALID_OUT]
 set_load -pin_load 4.37 [get_ports Y_FULL_OUT]
 set_ideal_network [get_ports rst_n]
-create_clock [get_ports clk]  -period 10  -waveform {0 5}
+create_clock [get_ports clk]  -period 5  -waveform {0 2.5}
 set_clock_latency 0.3  [get_clocks clk]
 set_clock_latency -source 4  [get_clocks clk]
 set_clock_uncertainty 0.5  [get_clocks clk]

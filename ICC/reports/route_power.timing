@@ -1,0 +1,304 @@
+
+  Loading design 'mesh_chip'
+
+
+Information: Setting a dont_touch attribute on net 'pe_enable[1]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[0]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[1]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[0]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[7]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[6]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[5]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[4]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[3]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_enable[2]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[1]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[0]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[7]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[6]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[5]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[4]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[3]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_receive_finish_flag[2]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'rst_n' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'clk' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[7]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[6]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[5]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[4]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[3]' because it is connected to a pad cell. (PSYN-088)
+Information: Setting a dont_touch attribute on net 'pe_task_send_finish_flag[2]' because it is connected to a pad cell. (PSYN-088)
+
+
+Information: Library Manufacturing Grid(GridResolution) : 5
+Information: Time Unit from Milkyway design library: 'ns' 
+Information: Design Library and main library timing units are matched - 1.000 ns. 
+Information: Resistance Unit from Milkyway design library: 'kohm' 
+Information: Design Library and main library resistance units are matched - 1.000 kohm. 
+Information: Capacitance Unit from Milkyway design library: 'pf' 
+Information: Design Library and main library capacitance units are matched - 1.000 pf. 
+Warning: Inconsistent library data found for layer POLY1. (RCEX-018)
+Information: The distance unit in Capacitance and Resistance is 1 micron. (RCEX-007)
+Information: The RC model used is detail route TLU+. (RCEX-015)
+Information: Start mixed mode parasitic extraction. (RCEX-023)
+Information: Start rc extraction...
+Memory usage for extraction task 486 Mbytes -- main task 1056 Mbytes.
+Warning: Net 'net_rst_n' is exceeding threshold (over 1000 pins) and will be skipped. (RCEX-020)
+Information: Parasitic source is LPE. (RCEX-040)
+Information: Parasitic mode is RealRC. (RCEX-041)
+Information: Using virtual shield extraction. (RCEX-081)
+Information: Extraction mode is MIN_MAX. (RCEX-042)
+Information: Extraction derate is 0/25/125. (RCEX-043)
+Information: Coupling capacitances are explicitly created. (RCEX-044)
+Information: Start back annotation for parasitic extraction. (RCEX-023)
+Information: End back annotation for parasitic extraction. (RCEX-023)
+Information: Start timing update for parasitic extraction. (RCEX-023)
+Information: End timing update for parasitic extraction. (RCEX-023)
+Information: End parasitic extraction. (RCEX-023)
+Information: Start rc update...
+****************************************************************
+Information: TLUPlus based RC computation is enabled. (RCEX-141)
+****************************************************************
+Information: The distance unit in Capacitance and Resistance is 1 micron. (RCEX-007)
+Information: The RC model used is TLU+. (RCEX-015)
+Information: Library Derived Cap for layer METAL1 : 0.00022 0.0002 (RCEX-011)
+Information: Library Derived Res for layer METAL1 : 0.00044 0.00024 (RCEX-011)
+Information: Library Derived Cap for layer METAL2 : 0.00021 0.00019 (RCEX-011)
+Information: Library Derived Res for layer METAL2 : 0.00036 0.0002 (RCEX-011)
+Information: Library Derived Cap for layer METAL3 : 0.00025 0.00023 (RCEX-011)
+Information: Library Derived Res for layer METAL3 : 0.00036 0.0002 (RCEX-011)
+Information: Library Derived Cap for layer METAL4 : 0.00021 0.00019 (RCEX-011)
+Information: Library Derived Res for layer METAL4 : 0.00036 0.0002 (RCEX-011)
+Information: Library Derived Cap for layer METAL5 : 0.00028 0.00026 (RCEX-011)
+Information: Library Derived Res for layer METAL5 : 0.0001 6.1e-05 (RCEX-011)
+Information: Library Derived Horizontal Cap : 0.00025 0.00023 (RCEX-011)
+Information: Library Derived Horizontal Res : 0.0003 0.00017 (RCEX-011)
+Information: Library Derived Vertical Cap : 0.00021 0.00019 (RCEX-011)
+Information: Library Derived Vertical Res : 0.00036 0.0002 (RCEX-011)
+Information: Using derived R and C coefficients. (RCEX-008)
+Information: Using region-based R and C coefficients. (RCEX-013)
+Information: Library Derived Via Res : 0.0095 0.001 (RCEX-011)
+Information: End rc update.
+Information: The mixed mode parasitic extraction has been performed. (RCEX-202)
+Information: Updating graph... (UID-83)
+
+************************************************************
+SI options:
+Delta Delay Computation:           true
+Static Noise Computation:          false
+Timing window analysis for SI:     false
+Reselection in timing window:      false
+Min Delta Delay for SI:            true
+Analysis Effort:                   low
+Max Transition Mode:               normal_slew
+Static Noise Thresholds:           0.35 (0.57V) above low
+                                   0.35 (0.57V) below high
+Route xtalk prevention:            true
+Route xtalk prevention threshold:  0.25
+************************************************************
+
+Warning: Design 'mesh_chip' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+Information: Updating design information... (UID-85)
+
+************************************************************
+SI options:
+Delta Delay Computation:           true
+Static Noise Computation:          false
+Timing window analysis for SI:     false
+Reselection in timing window:      false
+Min Delta Delay for SI:            true
+Analysis Effort:                   low
+Max Transition Mode:               normal_slew
+Static Noise Thresholds:           0.35 (0.57V) above low
+                                   0.35 (0.57V) below high
+Route xtalk prevention:            true
+Route xtalk prevention threshold:  0.25
+************************************************************
+
+Warning: Design 'mesh_chip' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+Information: Input delay ('rise') on clock port 'clk' will be added to the clock's propagated skew. (TIM-112)
+Information: Input delay ('fall') on clock port 'clk' will be added to the clock's propagated skew. (TIM-112)
+Information: Input delay ('rise') on clock port 'clk' will be added to the clock's propagated skew. (TIM-112)
+Information: Input delay ('fall') on clock port 'clk' will be added to the clock's propagated skew. (TIM-112)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : mesh_chip
+Version: D-2010.03-ICC-SP5-2
+Date   : Thu Apr 11 14:52:10 2024
+****************************************
+
+ * Some/all delay information is back-annotated.
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: slow   Library: slow
+	Parasitic source    : LPE
+	Parasitic mode      : RealRC
+	Extraction mode     : MIN_MAX
+	Extraction derating : 0/25/125
+
+Information: Percent of Arnoldi-based delays = 16.29%
+
+  Startpoint: pe_enable[4]
+              (input port clocked by clk)
+  Endpoint: insc_mesh/pecore_4__PE_unit/enable_reg
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: INPUTS
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             6.21       6.21
+  input external delay                                    5.00      11.21 f
+  pe_enable[4] (in)                                       0.32      11.53 f
+  PIW_pe_enable4/C (PIW)                                  0.97 *    12.50 f
+  insc_mesh/pe_enable[4] (mesh)                           0.00      12.50 f
+  insc_mesh/pecore_4__PE_unit/enable_wire (PE_4_0_1_2_3_5_6_7)
+                                                          0.00      12.50 f
+  insc_mesh/pecore_4__PE_unit/enable_reg/D (DFFRHQX1)     0.02 &    12.53 f
+  data arrival time                                                 12.53
+
+  clock clk (rise edge)                                  10.00      10.00
+  clock network delay (propagated)                        6.14      16.14
+  clock reconvergence pessimism                           0.00      16.14
+  clock uncertainty                                      -0.20      15.94
+  insc_mesh/pecore_4__PE_unit/enable_reg/CK (DFFRHQX1)
+                                                          0.00      15.94 r
+  library setup time                                     -0.34      15.60
+  data required time                                                15.60
+  --------------------------------------------------------------------------
+  data required time                                                15.60
+  data arrival time                                                -12.53
+  --------------------------------------------------------------------------
+  slack (MET)                                                        3.08
+
+
+  Startpoint: insc_mesh/pecore_7__PE_unit/task_send_finish_flag_reg
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: pe_task_send_finish_flag[7]
+            (output port clocked by clk)
+  Path Group: OUTPUTS
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (propagated)                        6.36       6.36
+  insc_mesh/pecore_7__PE_unit/task_send_finish_flag_reg/CK (DFFRHQX1)
+                                                          0.00       6.36 r
+  insc_mesh/pecore_7__PE_unit/task_send_finish_flag_reg/Q (DFFRHQX1)
+                                                          0.34       6.71 f
+  insc_mesh/pecore_7__PE_unit/U383/Y (CLKBUFX2)           1.08 &     7.79 f
+  insc_mesh/pecore_7__PE_unit/task_send_finish_flag (PE_7_0_1_2_3_4_5_6)
+                                                          0.00       7.79 f
+  insc_mesh/pe_task_send_finish_flag[7] (mesh)            0.00       7.79 f
+  PO8W_pe_task_send_finish_flag7/PAD (PO8W)               2.12 &     9.91 f
+  pe_task_send_finish_flag[7] (out)                       0.00 *     9.91 f
+  data arrival time                                                  9.91
+
+  clock clk (rise edge)                                  10.00      10.00
+  clock network delay (ideal)                             6.21      16.21
+  clock reconvergence pessimism                           0.00      16.21
+  clock uncertainty                                      -0.20      16.01
+  output external delay                                  -5.00      11.01
+  data required time                                                11.01
+  --------------------------------------------------------------------------
+  data required time                                                11.01
+  data arrival time                                                 -9.91
+  --------------------------------------------------------------------------
+  slack (MET)                                                        1.10
+
+
+  Startpoint: insc_mesh/pecore_6__PE_unit/time_stamp_reg_0_
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: insc_mesh/pecore_6__PE_unit/latency_sum_reg_25_
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (propagated)                        6.39       6.39
+  insc_mesh/pecore_6__PE_unit/time_stamp_reg_0_/CK (DFFRHQX1)
+                                                          0.00       6.39 r
+  insc_mesh/pecore_6__PE_unit/time_stamp_reg_0_/Q (DFFRHQX1)
+                                                          0.69       7.08 r
+  insc_mesh/pecore_6__PE_unit/U1251/Y (NOR2BX4)           0.22 &     7.30 r
+  insc_mesh/pecore_6__PE_unit/U360/Y (NOR2BX1)            0.19 &     7.49 r
+  insc_mesh/pecore_6__PE_unit/U357/Y (OAI222X1)           0.21 &     7.71 f
+  insc_mesh/pecore_6__PE_unit/U368/Y (OAI221XL)           0.15 &     7.86 r
+  insc_mesh/pecore_6__PE_unit/U365/Y (OAI221X1)           0.21 &     8.06 f
+  insc_mesh/pecore_6__PE_unit/U363/Y (OAI221XL)           0.15 &     8.21 r
+  insc_mesh/pecore_6__PE_unit/U361/Y (OAI221XL)           0.20 &     8.41 f
+  insc_mesh/pecore_6__PE_unit/U372/Y (OAI2BB1X1)          0.14 &     8.56 r
+  insc_mesh/pecore_6__PE_unit/U370/Y (OAI2BB1X1)          0.09 &     8.64 f
+  insc_mesh/pecore_6__PE_unit/U369/Y (OAI21X1)            0.13 &     8.78 r
+  insc_mesh/pecore_6__PE_unit/U86/Y (NOR2X1)              0.25 &     9.03 f
+  insc_mesh/pecore_6__PE_unit/U1259/Y (AND2X1)            0.40 &     9.43 f
+  insc_mesh/pecore_6__PE_unit/U1260/Y (NOR2X4)            0.18 &     9.60 r
+  insc_mesh/pecore_6__PE_unit/U89/Y (INVX8)               0.05 &     9.65 f
+  insc_mesh/pecore_6__PE_unit/add_757/B_0_ (PE_6_0_1_2_3_4_5_7_DW01_add_0)
+                                                          0.00       9.65 f
+  insc_mesh/pecore_6__PE_unit/add_757/U1/Y (AND2X2)       0.15 &     9.81 f
+  insc_mesh/pecore_6__PE_unit/add_757/U1_1/CO (ADDFX2)
+                                                          0.33 &    10.14 f
+  insc_mesh/pecore_6__PE_unit/add_757/U1_2/CO (CMPR32X1)
+                                                          0.33 &    10.47 f
+  insc_mesh/pecore_6__PE_unit/add_757/U1_3/CO (ADDFX2)
+                                                          0.36 &    10.83 f
+  insc_mesh/pecore_6__PE_unit/add_757/U1_4/CO (CMPR32X1)
+                                                          0.34 &    11.17 f
+  insc_mesh/pecore_6__PE_unit/add_757/U1_5/CO (ADDFX2)
+                                                          0.35 &    11.53 f
+  insc_mesh/pecore_6__PE_unit/add_757/U1_6/CO (CMPR32X1)
+                                                          0.34 &    11.87 f
+  insc_mesh/pecore_6__PE_unit/add_757/U1_7/CO (ADDFX2)
+                                                          0.36 &    12.23 f
+  insc_mesh/pecore_6__PE_unit/add_757/U22/Y (AND2X2)      0.19 &    12.43 f
+  insc_mesh/pecore_6__PE_unit/add_757/U23/Y (AND2X2)      0.17 &    12.60 f
+  insc_mesh/pecore_6__PE_unit/add_757/U24/Y (AND2X2)      0.17 &    12.77 f
+  insc_mesh/pecore_6__PE_unit/add_757/U25/Y (AND2X2)      0.17 &    12.94 f
+  insc_mesh/pecore_6__PE_unit/add_757/U26/Y (AND2X2)      0.17 &    13.11 f
+  insc_mesh/pecore_6__PE_unit/add_757/U27/Y (AND2X2)      0.17 &    13.28 f
+  insc_mesh/pecore_6__PE_unit/add_757/U28/Y (AND2X2)      0.17 &    13.45 f
+  insc_mesh/pecore_6__PE_unit/add_757/U29/Y (AND2X2)      0.17 &    13.62 f
+  insc_mesh/pecore_6__PE_unit/add_757/U30/Y (AND2X2)      0.17 &    13.80 f
+  insc_mesh/pecore_6__PE_unit/add_757/U31/Y (AND2X2)      0.17 &    13.97 f
+  insc_mesh/pecore_6__PE_unit/add_757/U32/Y (AND2X2)      0.17 &    14.14 f
+  insc_mesh/pecore_6__PE_unit/add_757/U33/Y (AND2X2)      0.17 &    14.31 f
+  insc_mesh/pecore_6__PE_unit/add_757/U34/Y (AND2X2)      0.17 &    14.49 f
+  insc_mesh/pecore_6__PE_unit/add_757/U35/Y (AND2X2)      0.17 &    14.66 f
+  insc_mesh/pecore_6__PE_unit/add_757/U36/Y (AND2X2)      0.17 &    14.83 f
+  insc_mesh/pecore_6__PE_unit/add_757/U37/Y (AND2X2)      0.17 &    15.00 f
+  insc_mesh/pecore_6__PE_unit/add_757/U38/Y (AND2X2)      0.17 &    15.18 f
+  insc_mesh/pecore_6__PE_unit/add_757/U3/Y (XOR2XL)       0.36 &    15.54 f
+  insc_mesh/pecore_6__PE_unit/add_757/SUM[25] (PE_6_0_1_2_3_4_5_7_DW01_add_0)
+                                                          0.00      15.54 f
+  insc_mesh/pecore_6__PE_unit/U384/Y (AOI22X1)            0.18 &    15.72 r
+  insc_mesh/pecore_6__PE_unit/U16/Y (INVXL)               0.08 &    15.80 f
+  insc_mesh/pecore_6__PE_unit/latency_sum_reg_25_/D (DFFRHQX1)
+                                                          0.00 &    15.80 f
+  data arrival time                                                 15.80
+
+  clock clk (rise edge)                                  10.00      10.00
+  clock network delay (propagated)                        6.25      16.25
+  clock reconvergence pessimism                           0.10      16.36
+  clock uncertainty                                      -0.20      16.16
+  insc_mesh/pecore_6__PE_unit/latency_sum_reg_25_/CK (DFFRHQX1)
+                                                          0.00      16.16 r
+  library setup time                                     -0.34      15.82
+  data required time                                                15.82
+  --------------------------------------------------------------------------
+  data required time                                                15.82
+  data arrival time                                                -15.80
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.02
+
+
+1

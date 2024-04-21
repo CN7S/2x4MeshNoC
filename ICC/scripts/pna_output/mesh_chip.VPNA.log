@@ -1,0 +1,43 @@
+
+Name of design : mesh_chip
+Number of cell instances in the design : 95121
+Number of cell instance masters in the library : 81
+
+Processing power net VSS ...
+Number of power net wires : 214
+Number of vias : 4493
+Average power dissipation in mesh_chip :  1000.00 mW
+Power supply voltage :     1.80 V
+Assigning vias begins
+Assigning power net wires ...
+Reading virtual power pads
+Extracting power net VSS ...
+Number of power pad nodes connecting to power net VSS : 10
+Number of power pad nodes reaching to the power ports of the leaf cells or blocks : 10
+Number of resistors in VSS : 8428
+Number of nodes in VSS : 6769
+Performing network simulation
+Assigning netlists to simulation engine begins
+Assigning netlists to simulation engine finished
+Maximum IR drop in mesh_chip : 225.30 mV
+Maximum current in mesh_chip : 145.574 mA
+
+Processing power net VDD ...
+Number of power net wires : 267
+Number of vias : 4517
+Average power dissipation in mesh_chip :  1000.00 mW
+Power supply voltage :     1.80 V
+Assigning vias begins
+Assigning power net wires ...
+Reading virtual power pads
+Extracting power net VDD ...
+Number of power pad nodes connecting to power net VDD : 15
+Number of power pad nodes reaching to the power ports of the leaf cells or blocks : 15
+Number of resistors in VDD : 8630
+Number of nodes in VDD : 6957
+Performing network simulation
+Assigning netlists to simulation engine begins
+Assigning netlists to simulation engine finished
+Maximum IR drop in mesh_chip : 192.22 mV
+Maximum current in mesh_chip : 146.606 mA
+Overall takes     0.60 seconds

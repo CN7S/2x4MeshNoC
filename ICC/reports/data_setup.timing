@@ -1,0 +1,91 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : mesh_chip
+Version: D-2010.03-ICC-SP5-2
+Date   : Thu Apr 11 14:29:42 2024
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: slow   Library: slow
+
+  Startpoint: insc_mesh/pecore_4__PE_unit/enable_reg
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: insc_mesh/pecore_4__PE_unit/latency_sum_reg_25_
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             4.30       4.30
+  insc_mesh/pecore_4__PE_unit/enable_reg/CK (DFFRHQX1)
+                                                          0.00 #     4.30 r
+  insc_mesh/pecore_4__PE_unit/enable_reg/Q (DFFRHQX1)     1.48       5.78 r
+  insc_mesh/pecore_4__PE_unit/U377/Y (INVX1)              0.67       6.45 f
+  insc_mesh/pecore_4__PE_unit/U96/Y (INVX1)               0.59       7.04 r
+  insc_mesh/pecore_4__PE_unit/U16/Y (AND2X1)              0.44       7.48 r
+  insc_mesh/pecore_4__PE_unit/U19/Y (AOI22X1)             0.19       7.67 f
+  insc_mesh/pecore_4__PE_unit/U49/Y (INVX1)               0.18       7.85 r
+  insc_mesh/pecore_4__PE_unit/add_757/B_1_ (PE_4_0_1_2_3_5_6_7_DW01_add_0)
+                                                          0.00       7.85 r
+  insc_mesh/pecore_4__PE_unit/add_757/U1_1/CO (ADDFX2)
+                                                          0.57       8.42 r
+  insc_mesh/pecore_4__PE_unit/add_757/U1_2/CO (CMPR32X1)
+                                                          0.29       8.70 r
+  insc_mesh/pecore_4__PE_unit/add_757/U1_3/CO (ADDFX2)
+                                                          0.31       9.02 r
+  insc_mesh/pecore_4__PE_unit/add_757/U1_4/CO (CMPR32X1)
+                                                          0.29       9.30 r
+  insc_mesh/pecore_4__PE_unit/add_757/U1_5/CO (ADDFX2)
+                                                          0.31       9.61 r
+  insc_mesh/pecore_4__PE_unit/add_757/U1_6/CO (CMPR32X1)
+                                                          0.29       9.90 r
+  insc_mesh/pecore_4__PE_unit/add_757/U1_7/CO (ADDFX2)
+                                                          0.31      10.21 r
+  insc_mesh/pecore_4__PE_unit/add_757/U22/Y (AND2X2)      0.16      10.37 r
+  insc_mesh/pecore_4__PE_unit/add_757/U23/Y (AND2X2)      0.15      10.52 r
+  insc_mesh/pecore_4__PE_unit/add_757/U24/Y (AND2X2)      0.15      10.68 r
+  insc_mesh/pecore_4__PE_unit/add_757/U25/Y (AND2X2)      0.15      10.83 r
+  insc_mesh/pecore_4__PE_unit/add_757/U26/Y (AND2X2)      0.15      10.99 r
+  insc_mesh/pecore_4__PE_unit/add_757/U27/Y (AND2X2)      0.15      11.14 r
+  insc_mesh/pecore_4__PE_unit/add_757/U28/Y (AND2X2)      0.15      11.29 r
+  insc_mesh/pecore_4__PE_unit/add_757/U29/Y (AND2X2)      0.15      11.45 r
+  insc_mesh/pecore_4__PE_unit/add_757/U30/Y (AND2X2)      0.15      11.60 r
+  insc_mesh/pecore_4__PE_unit/add_757/U31/Y (AND2X2)      0.15      11.76 r
+  insc_mesh/pecore_4__PE_unit/add_757/U32/Y (AND2X2)      0.15      11.91 r
+  insc_mesh/pecore_4__PE_unit/add_757/U33/Y (AND2X2)      0.15      12.06 r
+  insc_mesh/pecore_4__PE_unit/add_757/U34/Y (AND2X2)      0.15      12.22 r
+  insc_mesh/pecore_4__PE_unit/add_757/U35/Y (AND2X2)      0.15      12.37 r
+  insc_mesh/pecore_4__PE_unit/add_757/U36/Y (AND2X2)      0.15      12.53 r
+  insc_mesh/pecore_4__PE_unit/add_757/U37/Y (AND2X2)      0.15      12.68 r
+  insc_mesh/pecore_4__PE_unit/add_757/U38/Y (AND2X2)      0.16      12.84 r
+  insc_mesh/pecore_4__PE_unit/add_757/U3/Y (XOR2XL)       0.35      13.19 f
+  insc_mesh/pecore_4__PE_unit/add_757/SUM[25] (PE_4_0_1_2_3_5_6_7_DW01_add_0)
+                                                          0.00      13.19 f
+  insc_mesh/pecore_4__PE_unit/U367/Y (AOI22X1)            0.17      13.36 r
+  insc_mesh/pecore_4__PE_unit/U21/Y (INVXL)               0.06      13.42 f
+  insc_mesh/pecore_4__PE_unit/latency_sum_reg_25_/D (DFFRHQX1)
+                                                          0.00      13.42 f
+  data arrival time                                                 13.42
+
+  clock clk (rise edge)                                  10.00      10.00
+  clock network delay (ideal)                             4.30      14.30
+  clock uncertainty                                      -0.50      13.80
+  insc_mesh/pecore_4__PE_unit/latency_sum_reg_25_/CK (DFFRHQX1)
+                                                          0.00      13.80 r
+  library setup time                                     -0.34      13.46
+  data required time                                                13.46
+  --------------------------------------------------------------------------
+  data required time                                                13.46
+  data arrival time                                                -13.42
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.05
+
+
+1
