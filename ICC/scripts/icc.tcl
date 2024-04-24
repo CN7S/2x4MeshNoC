@@ -25,4 +25,4 @@ source run_design_planning.tcl
 source run_placement.tcl
 source run_cts.tcl
 source run_route.tcl
-#source run_finishing.tcl
+source run_finishing.tcl
